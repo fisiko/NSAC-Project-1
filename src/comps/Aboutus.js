@@ -10,6 +10,7 @@ export default function AboutUs() {
       <div class="col-md-6 mx-auto text-center">
          <div class="header-title">
             <h1 class="wv-heading--title">
+               HELLO
                Sign up for free!
             </h1>
             <h2 class="wv-heading--subtitle">
