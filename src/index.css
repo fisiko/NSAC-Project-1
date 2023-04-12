@@ -1,0 +1,151 @@
+  
+
+body {
+  /* margin: 10px; */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+/*background: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);*/
+  background: linear-gradient(135deg, hsla(1, 84%, 80%, 1) 0%, hsla(56, 59%, 67%, 1) 100%);
+  /*background: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);    */
+  
+}
+
+#showButton {
+  margin-left: 150px;
+  margin-bottom: 10px;
+}
+
+#topNavBar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  /* @media all and (min-width: 545px) {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+  }*/
+} 
+  /* li {
+      display: none; */
+      /* @media all and (min-width: 545px) {
+          display: block;
+      }
+  } */
+  a {
+      display: block;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-family: Futura, Trebuchet MS, Arial, sans-serif;
+      font-size: 0.7em;
+      color: rgb(209, 105, 53);
+      text-align: center;
+      padding: 14px 30px;
+      transition: .25s, box-shadow .15s;
+      border-left: "orange";
+  }
+
+      a:hover {
+          color: "white";
+          background: #4A4860;
+          box-shadow: 0px 4px 0px 0px #4A4860;
+      
+      /* @media all and (min-width: 545px) {
+          padding: 20px;
+      } */
+    
+}
+#searchBut {
+  color: "orange";
+  border-radius: 25%;
+  
+
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+h1 {
+  text-align: center;
+  margin-top: 50px;
+}
+.sellerForm .buyerForm{
+  border-style: ridge;
+  height: 100vh;
+  align-items: center;  
+  padding-left: 300px;
+
+}
+#addButt {
+  float:right;
+}
+.table1 {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  margin-left: auto;
+  margin-right: auto;
+  /* max-width: 80%; */
+  width: 80%;
+
+}
+
+@media only screen and (min-width: 1000px) {
+  .table1{
+    font-size: 20px;
+  }
+}
+  
+  
+
+
+th {
+  background-color: #363534;
+  color: rgb(255, 255, 255);
+}
+
+ td{
+  padding: 12px, 15px;
+  border: 1px solid hsl(29, 64%, 89%);
+  margin-left: 5px;
+
+}
+
+tr:hover :not(.my-button){
+  background-color: linear-gradient(135deg, rgb(59, 57, 58) 0%, rgb(169, 131, 18) 100%);
+  color: grey;
+
+}
+.my-button{
+  border: none;
+}
+.my-button:hover{
+  color: red;
+
+  /* background-color: purple; */
+
+}
+ tr:nth-of-type(even) {
+  background-color:"grey";
+}
+  tr:last-of-type {
+  border: 1px solid hsl(29, 64%, 89%);
+}
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+/* #trashCan:hover {
+  color:"red";
+} */
+/* .theTable {
+  overflow-x: auto;
+} */
+
+#topNavBar {
+  position: fixed;
+  width: 100%;
+  opacity: 0.8;
+}
+
