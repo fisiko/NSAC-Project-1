@@ -105,7 +105,7 @@ export default function Property() {
 
     return (
         <main>
-hello
+hello everyone
 <h1>Our Properties</h1>
             <form>
 
