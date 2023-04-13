@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+
 // import { faTrash } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,7 +10,9 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 export default function Sell() {
 
     const [sellerList, setSellerList] = useState([])
-    const [uniqueID, setUniqueID] = useState(0)
+    // const [uniqueID, setUniqueID] = useState(0)
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         fetch(`http://localhost:3000/seller`)
@@ -32,142 +36,140 @@ export default function Sell() {
         let choice = window.confirm("Are you sure you want to delete this record")
         if (choice) {
             setSellerList(tempR)
-            setUniqueID(uniqueID + 1)
+            // fetch("http://localhost:3000/seller")
+            // .then(response => response.json())
+            // .then(jsonData => {
+            //     // Remove the entry based on a specific condition
+            //     const updatedData = jsonData.filter(entry => entry.id !== recno);
+
+            //     // Update the JSON data on the server
+            //     fetch("http://localhost:3000/seller", {
+            //         method: 'PUT', // Use the appropriate HTTP method for updating data
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify(updatedData), // Convert the JavaScript object to JSON string
+            //     })
+            //         .then(response => {
+            //             if (response.ok) {
+            //                 console.log('Entry removed successfully.');
+            //             } else {
+            //                 console.error('Failed to remove entry from JSON file.');
+            //             }
+            //         })
+            //         .catch(error => {
+            //             console.error('Failed to update JSON file:', error);
+            //         });
+            // })
+            // .catch(error => {
+            //     console.error('Failed to fetch JSON data:', error);
+            // });
+
+
         }
         else { }
-    }
 
-    const forenameInputRef = useRef();
-    const surnameInputRef = useRef();
-    const addressInputRef = useRef();
-    const postcodeInputRef = useRef();
-    const phoneInputRef = useRef();
+        // fetch("http://localhost:3000/seller", {
+        //     method: "PUT",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify(tempR)
 
 
-    function addR() {
-        // newregno(addregno + 1)
+        // })
+        //     .then((response) => {
+        //         if (!response.ok) {
+        //             alert("An error has occured, unable to read sellers");
+        //             throw response.status;
+        //         } else navigate("/buyer");
+        //     })
+        //     .catch(error => {
+        //         console.error(error);
+        //     });
 
-
-        if (forenameInputRef.current.value != "") {
-
-
-            let tempR =
-
-            {
-                "firstName": forenameInputRef.current.value,
-                "surname": surnameInputRef.current.value,
-                "address": addressInputRef.current.value,
-                "postcode": postcodeInputRef.current.value,
-                "phone": phoneInputRef.current.value,
-                "id": sellerList.length + uniqueID + 1
-            }
-            setSellerList([...sellerList, tempR])
-
-
-        }
-        else {
-
-            alert("Please input both your name and marks")
-
-        }
-
+        
 
     }
 
+    // const forenameInputRef = useRef();
+    // const surnameInputRef = useRef();
+    // const addressInputRef = useRef();
+    // const postcodeInputRef = useRef();
+    // const phoneInputRef = useRef();
 
 
-    function onK(event) {
-        if (event.keyCode === 13) {
-
-            addR()
+    // function addR() {
+    //     // newregno(addregno + 1)
 
 
-        }
+    //     if (forenameInputRef.current.value != "") {
+
+
+    //         let tempR =
+
+    //         {
+    //             "firstName": forenameInputRef.current.value,
+    //             "surname": surnameInputRef.current.value,
+    //             "address": addressInputRef.current.value,
+    //             "postcode": postcodeInputRef.current.value,
+    //             "phone": phoneInputRef.current.value,
+    //             "id": sellerList.length + uniqueID + 1
+    //         }
+    //         setSellerList([...sellerList, tempR])
+
+
+    //     }
+    //     else {
+
+    //         alert("Please input both your name and marks")
+
+    //     }
+
+
+    // }
+
+
+
+    // function onK(event) {
+    //     if (event.keyCode === 13) {
+
+    //         addR()
+
+
+    //     }
+
+
+    // }
+    /*function (validateAndSave) {
+     const newSeller = {
+        "firstName": firstnameRef.current.value,
+        "surname": surnnameRef.current.value,
+        "address": addressRef.current.value,
+        "postcode": postcodeRef.current.value
+        
+        
+        
+        
+     }   
+    }*/
+
+
+    function showRec() {
+
 
 
     }
-
-
-
 
     return (
-        <>
+        <main>
 
 
-            <br />
-            <h1>Register as a seller</h1>
-            <br />
-            <br />
+            <div class="topSeller">
+                <Link to="/form" id="showButton" className="btn btn-primary "> Register as a seller </Link>
 
-
-
-
-
-            <form id="sellerForm">
-                <div class="form-row">
-                    <div class="mx-auto col-10 col-md-8 col-lg-6">
-                        <div class="form-group col">
-                            <label for="InputName">Forename</label>
-                            <input type="Name" ref={forenameInputRef} class="form-control" id="InpForename" aria-describedby="InputName" placeholder="Enter your forename"></input>
-                        </div>
-
-                        <div class="form-group col">
-                            <label for="InputName">Surname</label>
-                            <input type="Name" ref={surnameInputRef} class="form-control" id="InpSurname" aria-describedby="InputName" placeholder="Enter your surname"></input>
-                        </div>
+            </div>
 
 
 
-                        <div class="form-group">
-                            <label for="InputPhone">Phone Number</label>
-                            <input type="phone" ref={phoneInputRef} class="form-control" id="InputPhone" placeholder="Phone Number"></input>
-
-                        </div>
-
-                        <div class="form-group">
-                            <label for="InputAddress">Address</label>
-                            <input type="text" ref={addressInputRef} class="form-control" id="InputAddress" placeholder="Address"></input>
-
-                        </div>
-                        {/* <label for="inputAddress">Address</label> */}
-                        {/* <input type="text" class="form-control" id="inputAddress" placeholder="House Number"></input> */}
-                        <div class="form-group  col-md-5">
-                            <label for="inputCounty">County</label>
-                            <select id="inputCounty" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>Birmingham</option>
-                                <option>London</option>
-                                <option>Leeds</option>
-                                <option>Manchester</option>
-                                <option>Liverpool</option>
-                                <option>Bristol</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="inputPcode">Post Code</label>
-                            <input type="text" ref={postcodeInputRef} class="form-control" id="inputPcode"></input>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1"></input>
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>
-
-                        {/* <button type="submit" class="btn btn-primary" onClick={() => addR()}>Submit</button> */}
-                        <input type="button" class="btn btn-success" value="Add Record" onClick={() => addR()} id="addButt"></input>
-
-
-                    </div>
-
-
-
-
-                </div>
-            </form>
-            <br />
-            <br />
-            <br />
-            {/* <div class = "theTable"> */}
 
             <table class="table1">
                 <tr>
@@ -177,7 +179,9 @@ export default function Sell() {
                     <th scope="col">Address</th>
                     <th scope="col">Postcode</th>
                     <th scope="col">Phone</th>
+                    <th scope="col">Manage</th>
                     <th></th>
+
                 </tr>
                 {
 
@@ -188,6 +192,7 @@ export default function Sell() {
                         <td> {rec.address}  </td>
                         <td> {rec.postcode}  </td>
                         <td> {rec.phone}  </td>
+                        <td><Link to="/sellerProp">manage properties</Link></td>
                         {/* <td><input type="button" onClick={() => removeR(rec.id)}/><FontAwesomeIcon icon={faTrash} id="trashCan"/></td> */}
                         <td>    <button className="my-button">
                             <FontAwesomeIcon icon={faTrash} onClick={() => removeR(rec.id)} />
@@ -213,7 +218,7 @@ export default function Sell() {
 
 
 
-        </>
+        </main>
     )
 
 }

@@ -3,9 +3,17 @@
 export default function AboutUs() {
 
     return (
-        <>
+
+
+        <main>
+         <section class="">
+
+   
+
+
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"></link>
-   <div class="container">
+   <div class="container-fluid">
+   <div class="row">
     <div class="col-md-6 mx-auto text-center">
       <div class="col-md-6 mx-auto text-center">
          <div class="header-title">
@@ -18,7 +26,7 @@ export default function AboutUs() {
             </h2>
          </div>
       </div>
-      <div class="row">
+      </div>
          <div class="col-md-4 mx-auto">
             <div class="myform form ">
                <form action="" method="post" name="login">
@@ -52,7 +60,7 @@ export default function AboutUs() {
          </div>
       </div>
    </div>
-   </div>
-   </>
+   </section>
+   </main>
     )
 }

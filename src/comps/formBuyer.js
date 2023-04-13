@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 
 
 
-export default function NewForm() {
+export default function NewForm2() {
 
     const forenameInputRef = useRef();
     const surnameInputRef = useRef();
@@ -26,7 +26,7 @@ export default function NewForm() {
                 "phone": phoneInputRef.current.value
             }
 
-            fetch("http://localhost:3000/seller", {
+            fetch("http://localhost:3000/buyer", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(tempR)
@@ -37,7 +37,7 @@ export default function NewForm() {
                     if (!response.ok) {
                         alert("An error has occured, unable to read sellers");
                         throw response.status;
-                    } else navigate("/seller");
+                    } else navigate("/buyer");
                 })
                 .catch(error => {
                     console.error(error);
@@ -140,7 +140,7 @@ export default function NewForm() {
 
                         <Link className="btn btn-success" onClick={() => addR()}> Save </Link>
 
-                        <Link to="/seller" className="btn btn-primary"> Cancel </Link>
+                        <Link to="/buyer" className="btn btn-primary"> Cancel </Link>
 
 
                     </div>
@@ -153,37 +153,3 @@ export default function NewForm() {
         </main>
     )
 }
-
-// const MyForm = () => {
-//   const [formData, setFormData] = useState({
-//     email: '',
-//     isValid: false,
-//   });
-
-//   const handleChange = (event) => {
-//     const { name, value } = event.target;
-//     setFormData({ ...formData, [name]: value });
-//   };
-
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     // Form submission logic
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <input
-//         type="email"
-//         name="email"
-//         value={formData.email}
-//         onChange={handleChange}
-//         required
-//         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
-//       />
-//       {formData.isValid && <i className="fa fa-check" />} {/* Render tick icon if form field is valid */}
-//       <button type="submit">Submit</button>
-//     </form>
-//   );
-// };
-
-// export default MyForm;

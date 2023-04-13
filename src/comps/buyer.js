@@ -1,12 +1,16 @@
 import { useState, useRef, useEffect } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import{Link, useNavigate} from "react-router-dom"
+
 
 
 export default function BuyerData() {
 
     const [sellerList, setSellerList] = useState([])
     const [uniqueID, setUniqueID] = useState(0)
+    const navigate = useNavigate()
+
     useEffect(() => {
         fetch(`http://localhost:3000/buyer`)
             .then((response) => {
@@ -109,16 +113,16 @@ showButton.current.value = "Hide"
 
 
     return (
-        <>
+        <main>
 
 
-            <br />
-            <h1>Register as a buyer</h1>
-            <br />
-            <br />
+      <div class="topSeller">            <Link to="/formBuyer" className = "btn btn-primary"  id="showButton"> Register To Buy </Link>
+</div> 
 
 
-            <input type="button" class="btn btn-success" value="Add Record" onClick={() => formDisplay()} ref={showButton} id="showButton"></input>
+
+
+            {/* <input type="button" class="btn btn-success" value="Add Record" onClick={() => formDisplay()} ref={showButton} id="showButton"></input> */}
 
 
 
@@ -233,7 +237,7 @@ showButton.current.value = "Hide"
 
 
 
-        </>
+        </main>
     )
 
 }

@@ -67,6 +67,14 @@
       "postcode": "",
       "phone": "",
       "id": 11
+    },
+    {
+      "firstName": "Fidessa",
+      "surname": "Isiko",
+      "address": "",
+      "postcode": "",
+      "phone": "07584932924",
+      "id": 12
     }
   ],
   "property": [
@@ -119,6 +127,16 @@
       "sellerId": 4,
       "status": "SOLD",
       "id": 4
+    },
+    {
+      "type": "DETACHED",
+      "price": "",
+      "bedroom": "1",
+      "bathroom": "1",
+      "garden": "true",
+      "address": "47",
+      "postcode": "SS14 1LB",
+      "id": 5
     }
   ],
   "buyer": [
@@ -145,6 +163,14 @@
       "postcode": "W1",
       "phone": "",
       "id": 3
+    },
+    {
+      "firstName": "Fidessa",
+      "surname": "Isiko",
+      "address": "",
+      "postcode": "",
+      "phone": "07584932924",
+      "id": 4
     }
   ],
   "booking": [
