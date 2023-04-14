@@ -59,30 +59,6 @@
       "postcode": "CF1 1AA",
       "phone": "1234234",
       "id": 10
-    },
-    {
-      "firstName": "",
-      "surname": "",
-      "address": "",
-      "postcode": "",
-      "phone": "",
-      "id": 11
-    },
-    {
-      "firstName": "Fidessa",
-      "surname": "Isiko",
-      "address": "",
-      "postcode": "",
-      "phone": "07584932924",
-      "id": 12
-    },
-    {
-      "firstName": "Fidessa",
-      "surname": "Isiko",
-      "address": "47",
-      "postcode": "SS14 1LB",
-      "phone": "07584932924",
-      "id": 13
     }
   ],
   "property": [
@@ -96,7 +72,7 @@
       "bathroom": 1,
       "garden": 0,
       "sellerId": 1,
-      "status": "Withdrawn",
+      "status": "SOLD",
       "buyerId": 3
     },
     {
@@ -109,7 +85,7 @@
       "bathroom": 1,
       "garden": 0,
       "sellerId": 1,
-      "status": "Withdrawn",
+      "status": "SOLD",
       "buyerId": 3
     },
     {
@@ -186,28 +162,66 @@
       "id": 8
     },
     {
-      "type": "h",
-      "price": "h",
-      "bedroom": "",
-      "bathroom": "jnk",
-      "garden": "hjkb",
-      "address": "kjg",
-      "postcode": "uii",
+      "type": "DETACHED",
+      "price": "110000",
+      "bedroom": "2",
+      "bathroom": "1",
+      "garden": "1",
+      "address": "The terrace",
+      "postcode": "E3 tok",
       "sellerId": 9,
-      "status": "n",
+      "status": "FOR SALE",
       "id": 9
     },
     {
-      "type": "",
-      "price": "jh",
+      "type": "DETACHED",
+      "price": "1000000",
       "bedroom": "",
-      "bathroom": "k",
-      "garden": "h",
-      "address": "123",
-      "postcode": "jh",
+      "bathroom": "",
+      "garden": "",
+      "address": "",
+      "postcode": "",
       "sellerId": "1",
-      "status": "j",
-      "id": 10
+      "status": "WITHDRAWN",
+      "id": 10,
+      "buyerId": ""
+    },
+    {
+      "type": "DETACHED",
+      "price": "",
+      "bedroom": "1",
+      "bathroom": "1",
+      "garden": "1",
+      "address": "470",
+      "postcode": "SS14 1LB",
+      "sellerId": "2",
+      "status": "FOR SALE",
+      "id": 11
+    },
+    {
+      "type": "DETACHED",
+      "price": "1",
+      "bedroom": "1",
+      "bathroom": "1",
+      "garden": "1",
+      "address": "1",
+      "postcode": "1",
+      "sellerId": "3",
+      "status": "WITHDRAWN",
+      "id": 12
+    },
+    {
+      "type": "",
+      "price": "",
+      "bedroom": "",
+      "bathroom": "",
+      "garden": "",
+      "address": "",
+      "postcode": "",
+      "sellerId": "1",
+      "status": "WITHDRAWN",
+      "id": 13,
+      "buyerId": "6"
     }
   ],
   "buyer": [
@@ -236,12 +250,20 @@
       "id": 3
     },
     {
-      "firstName": "Fidessa",
-      "surname": "Isiko",
-      "address": "",
-      "postcode": "",
+      "firstName": "do",
+      "surname": "0",
+      "address": "47",
+      "postcode": "SS14 1LB",
       "phone": "07584932924",
       "id": 4
+    },
+    {
+      "firstName": "d",
+      "surname": "0",
+      "address": "47",
+      "postcode": "SS14 1LB",
+      "phone": "07584932924",
+      "id": 5
     }
   ],
   "booking": [

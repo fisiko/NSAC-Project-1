@@ -29,14 +29,14 @@ root.render(
 
     <BrowserRouter>
 <div id="topOfPage"></div>
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="topNavBar">
+      <nav class="navbar navbar-inverse navbar-expand-sm navbar-dark bg-dark" id="topNavBar">
         <div class="container-fluid">
           <div class="navbar-brand"><Link class="nav-link" to="/" ><FontAwesomeIcon icon={faHouse} /></Link></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav nav">
               {/* <li class="nav-item"><Link class="nav-link" to="/" >Home</Link></li> */}
               <li class="nav-item"><Link class="nav-link" to="/aboutus" >About Us</Link></li>
               <li class="nav-item"><Link class="nav-link" to="/buyer" >Buyer</Link></li>

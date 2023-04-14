@@ -48,16 +48,23 @@ export default function Sell() {
             setSellerList(tempR)
 
 
-
+            fetch(`http://localhost:3000/seller/${recno}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => response.json())
+                .then(deletedData => {
+                    console.log('JSON entry deleted successfully!', deletedData);
+                    // Perform additional actions as needed after successful deletion
+                })
+                .catch(error => {
+                    console.error('Failed to delete JSON entry:', error);
+                });
         }
         else { }
-
-
-        
-
-    }
-
-
+    };
 
 
     function showRec() {

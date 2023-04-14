@@ -44,22 +44,6 @@ export default function Property() {
     }, []);
 
 
-    function removeR(recno) {
-
-        let tempR = propertyList.filter[(recs => recs.id != recno)]
-        let choice = window.confirm("Are you sure you want to delete this record")
-        if (choice) {
-            setpropertyList(tempR)
-
-
-
-        }
-        else { }
-
-
-
-
-    }
 
 
 
@@ -216,6 +200,8 @@ export default function Property() {
             <table class="table1">
                 <tr>
                     <th scope="col">ID</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Postcode</th>
                     <th scope="col">Type</th>
                     <th scope="col">Price</th>
                     <th scope="col">Bedroom</th>
@@ -229,8 +215,8 @@ export default function Property() {
 
                     propertyList.map(rec => <tr>
                         <td> {rec.id}  </td>
-                        {/* <td> {rec.address}  </td> */}
-                        {/* <td> {rec.postcode}  </td> */}
+                        <td> {rec.address}  </td>
+                        <td> {rec.postcode}  </td>
                         <td> {rec.type}  </td>
                         <td> {rec.price}  </td>
                         <td> {rec.bedroom}  </td>

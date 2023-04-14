@@ -12,42 +12,72 @@ export default function NewForm2() {
     const phoneInputRef = useRef();
     const navigate = useNavigate()
 
+    const [buyerList, setbuyerList] = useState([])
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/buyer`)
+            .then((response) => {
+                if (!response.ok) {
+                    alert("An error has occured, unable to read buyers");
+                    throw response.status;
+                } else return response.json();
+            })
+            .then(buyers => { setbuyerList(buyers) })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
+
+
     function addR() {
 
+        const tempR = {
+            "firstName": forenameInputRef.current.value,
+            "surname": surnameInputRef.current.value,
+            "address": addressInputRef.current.value,
+            "postcode": postcodeInputRef.current.value,
+            "phone": phoneInputRef.current.value
+        }
 
-        if (forenameInputRef.current.value != "" && surnameInputRef.current.value != "") {
+
+        const compareObjects = (obj1, obj2) => {
+            const firstNameMatch = obj1.firstName.toLowerCase() === obj2.firstName.toLowerCase();
+            const surNameMatch = obj1.surname.toLowerCase() === obj2.surname.toLowerCase();
+            return firstNameMatch && surNameMatch;
+        };
+
+        if (!buyerList.some(item => compareObjects(item, tempR))) {
+            if (forenameInputRef.current.value != "" && surnameInputRef.current.value != "") {
 
 
-            const tempR = {
-                "firstName": forenameInputRef.current.value,
-                "surname": surnameInputRef.current.value,
-                "address": addressInputRef.current.value,
-                "postcode": postcodeInputRef.current.value,
-                "phone": phoneInputRef.current.value
+
+                fetch("http://localhost:3000/buyer", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(tempR)
+
+
+                })
+                    .then((response) => {
+                        if (!response.ok) {
+                            alert("An error has occured, unable to read buyers");
+                            throw response.status;
+                        } else navigate("/buyer");
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+
+            }
+            else {
+
+                alert("Please input your full name")
             }
 
-            fetch("http://localhost:3000/buyer", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(tempR)
+        } else {
 
-
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        alert("An error has occured, unable to read sellers");
-                        throw response.status;
-                    } else navigate("/buyer");
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-
-
-        }
-        else {
-
-            alert("Please input your full name")
+            alert("Sorry, this user is already registered")
         }
 
 
@@ -73,7 +103,7 @@ export default function NewForm2() {
 
 
 
-            <form id="sellerForm" class="row g-3 needs-validation" novalidate>
+            <form id="buyerForm" class="row g-3 needs-validation" novalidate>
                 <div class="form-row">
                     <div class="mx-auto col-10 col-md-8 col-lg-6">
                         <div for="validationCustom01" class="form-label form-group col form-control is-valid">

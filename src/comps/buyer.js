@@ -7,7 +7,7 @@ import{Link, useNavigate} from "react-router-dom"
 
 export default function BuyerData() {
 
-    const [sellerList, setSellerList] = useState([])
+    const [buyerList, setbuyerList] = useState([])
     const [uniqueID, setUniqueID] = useState(0)
     const navigate = useNavigate()
 
@@ -15,11 +15,11 @@ export default function BuyerData() {
         fetch(`http://localhost:3000/buyer`)
             .then((response) => {
                 if (!response.ok) {
-                    alert("An error has occured, unable to read sellers");
+                    alert("An error has occured, unable to read buyers");
                     throw response.status;
                 } else return response.json();
             })
-            .then(sellers => { setSellerList(sellers) })
+            .then(buyers => { setbuyerList(buyers) })
             .catch(error => {
                 console.error(error);
             });
@@ -30,14 +30,29 @@ export default function BuyerData() {
     
     function removeR(recno) {
 
-        let tempR = sellerList.filter(recs => recs.id != recno)
+        let tempR = buyerList.filter(recs => recs.id != recno)
         let choice = window.confirm("Are you sure you want to delete this record")
         if (choice) {
-            setSellerList(tempR)
-            setUniqueID(uniqueID + 1)
+            setbuyerList(tempR)
+
+
+            fetch(`http://localhost:3000/buyer/${recno}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => response.json())
+                .then(deletedData => {
+                    console.log('JSON entry deleted successfully!', deletedData);
+                    // Perform additional actions as needed after successful deletion
+                })
+                .catch(error => {
+                    console.error('Failed to delete JSON entry:', error);
+                });
         }
         else { }
-    }
+    };
 
     const forenameInputRef = useRef();
     const surnameInputRef = useRef();
@@ -65,10 +80,10 @@ export default function BuyerData() {
                 "address": addressInputRef.current.value,
                 "postcode": postcodeInputRef.current.value,
                 "phone": phoneInputRef.current.value,
-                "id": sellerList.length + uniqueID + 1
+                "id": buyerList.length + uniqueID + 1
             }
             // tempR = tempR.map((item, index) => {return {...item, regno: index}})
-            setSellerList([...sellerList, tempR])
+            setbuyerList([...buyerList, tempR])
 
 
         }
@@ -118,14 +133,6 @@ showButton.current.value = "Hide"
 
       <div class="topSeller">            <Link to="/formBuyer" className = "btn btn-secondary"  id="showButton"> Register To Buy </Link>
 </div> 
-
-
-
-
-            {/* <input type="button" class="btn btn-success" value="Add Record" onClick={() => formDisplay()} ref={showButton} id="showButton"></input> */}
-
-
-
 
             <form id="buyerForm"  ref={bForm} style={{display: "none"}}>
                 <div class="form-row">
@@ -205,7 +212,7 @@ showButton.current.value = "Hide"
                 </tr>
                 {
 
-                    sellerList.map(rec => <tr>
+                    buyerList.map(rec => <tr>
                         <td> {rec.id}  </td>
                         <td> {rec.firstName}  </td>
                         <td> {rec.surname}  </td>
