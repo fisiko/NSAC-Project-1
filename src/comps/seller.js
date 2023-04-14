@@ -46,34 +46,7 @@ export default function Sell() {
         let choice = window.confirm("Are you sure you want to delete this record")
         if (choice) {
             setSellerList(tempR)
-            // fetch("http://localhost:3000/seller")
-            // .then(response => response.json())
-            // .then(jsonData => {
-            //     // Remove the entry based on a specific condition
-            //     const updatedData = jsonData.filter(entry => entry.id !== recno);
 
-            //     // Update the JSON data on the server
-            //     fetch("http://localhost:3000/seller", {
-            //         method: 'PUT', // Use the appropriate HTTP method for updating data
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //         },
-            //         body: JSON.stringify(updatedData), // Convert the JavaScript object to JSON string
-            //     })
-            //         .then(response => {
-            //             if (response.ok) {
-            //                 console.log('Entry removed successfully.');
-            //             } else {
-            //                 console.error('Failed to remove entry from JSON file.');
-            //             }
-            //         })
-            //         .catch(error => {
-            //             console.error('Failed to update JSON file:', error);
-            //         });
-            // })
-            // .catch(error => {
-            //     console.error('Failed to fetch JSON data:', error);
-            // });
 
 
         }
@@ -127,7 +100,8 @@ export default function Sell() {
                         <td> {rec.postcode}  </td>
                         <td> {rec.phone}  </td>
                         {/* <td><Link to={urlSellerProperties}>manage properties</Link></td> */}
-                        <button className="btn btn-link" onClick={()=> showProperties(rec)}>manage properties</button>
+                        <td>                        <button className="btn btn-link" onClick={()=> showProperties(rec)}>manage properties</button>
+</td>
                         {/* <td><input type="button" onClick={() => removeR(rec.id)}/><FontAwesomeIcon icon={faTrash} id="trashCan"/></td> */}
                         <td>    <button className="my-button">
                             <FontAwesomeIcon icon={faTrash} onClick={() => removeR(rec.id)} />

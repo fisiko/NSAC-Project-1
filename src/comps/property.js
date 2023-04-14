@@ -14,19 +14,18 @@ export default function Property() {
     const [propertyList, setpropertyList] = useState([])
     const navigate = useNavigate()
     const [propCriteria, setPropCriteria] = useState([])
-    const [count, setCount] = useState(0)
-    const [val, setVal] = useState()
 
-    
-    const inputGardenRef= useRef(null);
+
+    const inputGardenRef = useRef(null);
     const inputBedRef = useRef(null);
     const inputBathRef = useRef(null);
     const inputTypeRef = useRef(null);
     const inputMaxPriceRef = useRef(null);
+    const inputStatusRef = useRef(null);
 
-    
+
     useEffect(() => {
-        
+
         fetch(`http://localhost:3000/property`)
             .then((response) => {
                 if (!response.ok) {
@@ -36,7 +35,8 @@ export default function Property() {
             })
             // .then(sellers => { setpropertyList(sellers) })
             .then(
-                pList => { setpropertyList(pList) 
+                pList => {
+                    setpropertyList(pList)
                 }) //linking IDs
             .catch(error => {
                 console.error(error);
@@ -64,57 +64,70 @@ export default function Property() {
 
 
     function showRec() {
-        
-      const tempR = {
-        "garden": inputGardenRef.current.value,
-        "bedroom": inputBedRef.current.value,
-        "bath": inputBathRef.current.value,
-        "type": inputTypeRef.current.value,
-        "maxprice": inputMaxPriceRef.current.value,
+
+        const tempR = {
+            "garden": inputGardenRef.current.value,
+            "bedroom": inputBedRef.current.value,
+            "bath": inputBathRef.current.value,
+            "type": inputTypeRef.current.value,
+            "maxprice": inputMaxPriceRef.current.value,
+            "status": inputStatusRef.current.value,
 
 
         }
-        
-        // return 3;
 
-        // if (tempR.bedroom != "Any" || tempR.garden != "Any" || tempR.bath != "Any" || tempR.type != "Any" || tempR.maxprice != "Any")
+
 
         fetch(`http://localhost:3000/property`)
-        .then((response) => {
-            if (!response.ok) {
-                alert("An error has occured, unable to read sellers");
-                throw response.status;
-            } else return response.json();
-        })
-        // .then(sellers => { setpropertyList(sellers) })
-        .then(
-            pList => { setpropertyList(pList.filter(property=> {return property.bedroom==tempR.bedroom || property.bathroom==tempR.bath  || property.garden==tempR.garden  || property.type==tempR.type  || property.price<=tempR.maxprice;})); 
-            }) //linking IDs
-        .catch(error => {
-            console.error(error);
-        });
+            .then((response) => {
+                if (!response.ok) {
+                    alert("An error has occured, unable to read sellers");
+                    throw response.status;
+                } else return response.json();
+            })
+            // .then(sellers => { setpropertyList(sellers) })
+            .then(
+                pList => {
+                    setpropertyList(pList.filter(property => {
+                        return (
+                            (tempR.garden === 'Any' || property.garden == tempR.garden) &&
+                            (tempR.bedroom === 'Any' || property.bedroom == tempR.bedroom) &&
+                            (tempR.bath === 'Any' || property.bathroom == tempR.bath) &&
+                            (tempR.type === 'Any' || property.type == tempR.type) &&
+                            (tempR.maxprice === 'Any' || property.price <= parseInt(tempR.maxprice)) &&
+                            (tempR.status === 'Any' || property.status == tempR.status)
+
+                        );
+                    }));
+                }) //linking IDs
+            .catch(error => {
+                console.error(error);
+            });
 
 
 
 
 
-        
+
+
+
+
+
     }
 
 
 
     return (
         <main>
-hello everyone
-<h1>Our Properties</h1>
+            <h1>Our Properties</h1>
             <form>
 
-                <div class="row topSeller">
+                <div class="row topSeller" >
 
 
                     <div class="col-md-1">
                         <label for="inputGarden">Garden</label>
-                        <select ref={inputGardenRef} onChange={showRec} class="form-control">
+                        <select ref={inputGardenRef} class="form-control">
                             <option selected>Any</option>
                             <option>1</option>
                             <option>0</option>
@@ -123,8 +136,8 @@ hello everyone
                     </div>
                     <div class="col-md-2">
                         <label for="inputMinBed">Bedrooms</label>
-                        <select ref={inputBedRef}  onChange={showRec} class="form-control">
-                        <option selected>Any</option>
+                        <select ref={inputBedRef} class="form-control">
+                            <option selected>Any</option>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -133,8 +146,8 @@ hello everyone
                     </div>
                     <div class="col-md-2">
                         <label for="inputMinBath">Bathroom</label>
-                        <select ref={inputBathRef} onChange={showRec} class="form-control">
-                        <option selected>Any</option>
+                        <select ref={inputBathRef} class="form-control">
+                            <option selected>Any</option>
 
                             <option>1</option>
                             <option>2</option>
@@ -143,45 +156,57 @@ hello everyone
                         </select>
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <label for="inputType">Type</label>
-                        <select ref={inputTypeRef} onChange={showRec} class="form-control">
-                        <option selected>Any</option>
+                        <select ref={inputTypeRef} class="form-control">
+                            <option selected>Any</option>
 
-                            <option>Detached</option>
-                            <option>Apartment</option>
-                            <option>Semi-Detached</option>
+                            <option>DETACHED</option>
+                            <option>APARTMENT</option>
+                            {/* <option>Semi-Detached</option> */}
 
                         </select>
                     </div>
-                
-           
-                    <div class="col-md-1">
+
+
+                    <div class="col-md-2">
                         <label for="inputMaxPrice">Max Price</label>
-                        <select ref={inputMaxPriceRef}  onChange={showRec}class="form-control">
-                        <option selected>Any</option>
+                        <select ref={inputMaxPriceRef} class="form-control">
+                            <option selected>Any</option>
 
-                            <option>100,000</option>
-                            <option>150,000</option>
-                            <option>200,000</option>
-                            <option>250,000</option>
+                            <option>100000</option>
+                            <option>150000</option>
+                            <option>200000</option>
+                            <option>250000</option>
 
                         </select>
                     </div>
-                    <div>
+                    <div class="col-md-2">
+                        <label for="inputStatus">Status</label>
+                        <select ref={inputStatusRef} class="form-control">
+                            <option selected>Any</option>
+
+                            <option>SOLD</option>
+                            <option>FOR SALE</option>
+
+                        </select>
                     </div>
 
 
-</div>
 
-               
+                </div>
+
+
 
 
 
 
             </form>
 
-                    <button className="btn btn-link" onClick={()=> showRec()}>Search For properties</button>
+            <br />
+            <br />
+            <div className="topSeller">                    <button className="btn btn-primary" id="showButton" onClick={() => showRec()}>Search For properties</button>
+            </div>
 
 
 
@@ -211,12 +236,23 @@ hello everyone
                         <td> {rec.bedroom}  </td>
                         <td> {rec.bathroom}  </td>
                         <td> {rec.garden}  </td>
-                        <td> {rec.status}  </td>
+
+                        {
+                        rec.status=="FOR SALE" ?
+                        <td><div className="topSeller"><button className="btn btn-primary">Available</button></div></td>
+
+
+                        :
+                            <td> {rec.status}  </td>
+
+                        
+                        }
+
                         {/* <td> {rec.sellerId}  </td> */}
                         {/* <td> {rec.buyerId}  </td> */}
-                        
+
                         <td><button className="btn btn-link">Inspect property</button></td>
-                       
+
 
                     </tr>
                     )

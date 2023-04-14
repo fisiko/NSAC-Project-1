@@ -75,6 +75,14 @@
       "postcode": "",
       "phone": "07584932924",
       "id": 12
+    },
+    {
+      "firstName": "Fidessa",
+      "surname": "Isiko",
+      "address": "47",
+      "postcode": "SS14 1LB",
+      "phone": "07584932924",
+      "id": 13
     }
   ],
   "property": [
@@ -130,12 +138,14 @@
     },
     {
       "type": "DETACHED",
-      "price": "",
-      "bedroom": "1",
-      "bathroom": "1",
+      "price": "175000",
+      "bedroom": "2",
+      "bathroom": "3",
       "garden": "true",
       "address": "47",
       "postcode": "SS14 1LB",
+      "sellerId": "13",
+      "status": "FOR SALE",
       "id": 5
     }
   ],

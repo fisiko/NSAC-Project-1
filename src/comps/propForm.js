@@ -37,7 +37,7 @@ export default function PropForm(){
                  "address": addressInputRef.current.value,
                  "postcode": postcodeInputRef.current.value,
                  "sellerId": sellerID,
-               //   "status": "SOLD",
+                "status": "FOR SALE",
                //   "buyerId": 3
 
                }
@@ -122,8 +122,8 @@ export default function PropForm(){
            </select>
            Garden:
            <select className="form-select" ref={gardenInputRef}>
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
                     </select>
            
                     Address: <input  ref={addressInputRef}/><br/>

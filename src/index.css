@@ -19,7 +19,10 @@ body {
 #showButton {
 
   margin-bottom: 20px;
+
 }
+
+
 
 #topNavBar ul {
   list-style: none;
@@ -123,6 +126,7 @@ th {
 tr:hover :not(.my-button){
   background-color: linear-gradient(135deg, rgb(59, 57, 58) 0%, rgb(169, 131, 18) 100%);
   color: grey;
+  cursor: pointer;
 
 }
 .my-button{
@@ -163,7 +167,7 @@ main {
  
 }
 
-.topSeller{
+.topSeller, button{
   display: flex;
   justify-content:center;
   align-items:center;
