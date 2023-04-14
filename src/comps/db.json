@@ -175,31 +175,6 @@
     },
     {
       "type": "DETACHED",
-      "price": "1000000",
-      "bedroom": "",
-      "bathroom": "",
-      "garden": "",
-      "address": "",
-      "postcode": "",
-      "sellerId": "1",
-      "status": "WITHDRAWN",
-      "id": 10,
-      "buyerId": ""
-    },
-    {
-      "type": "DETACHED",
-      "price": "",
-      "bedroom": "1",
-      "bathroom": "1",
-      "garden": "1",
-      "address": "470",
-      "postcode": "SS14 1LB",
-      "sellerId": "2",
-      "status": "FOR SALE",
-      "id": 11
-    },
-    {
-      "type": "DETACHED",
       "price": "1",
       "bedroom": "1",
       "bathroom": "1",
@@ -211,17 +186,28 @@
       "id": 12
     },
     {
-      "type": "",
-      "price": "",
-      "bedroom": "",
-      "bathroom": "",
-      "garden": "",
-      "address": "",
-      "postcode": "",
-      "sellerId": "1",
-      "status": "WITHDRAWN",
-      "id": 13,
-      "buyerId": "6"
+      "type": "DETACHED",
+      "price": "110000",
+      "bedroom": "1",
+      "bathroom": "1",
+      "garden": "1",
+      "address": "67",
+      "postcode": "E4",
+      "sellerId": "3",
+      "status": "FOR SALE",
+      "id": 13
+    },
+    {
+      "type": "DETACHED",
+      "price": "150000",
+      "bedroom": "2",
+      "bathroom": "2",
+      "garden": "1",
+      "address": "Manchester",
+      "postcode": "M8",
+      "sellerId": "9",
+      "status": "FOR SALE",
+      "id": 14
     }
   ],
   "buyer": [
@@ -248,22 +234,6 @@
       "postcode": "W1",
       "phone": "",
       "id": 3
-    },
-    {
-      "firstName": "do",
-      "surname": "0",
-      "address": "47",
-      "postcode": "SS14 1LB",
-      "phone": "07584932924",
-      "id": 4
-    },
-    {
-      "firstName": "d",
-      "surname": "0",
-      "address": "47",
-      "postcode": "SS14 1LB",
-      "phone": "07584932924",
-      "id": 5
     }
   ],
   "booking": [
