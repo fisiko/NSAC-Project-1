@@ -173,7 +173,6 @@ function SellerProp() {
         }
         else {
 
-            const statusChange = { status: "Withdrawn" };
 
                       
             // const statusChange = { status: "Withdrawn" };
@@ -187,11 +186,13 @@ function SellerProp() {
                 "garden": gardenRef.current.value,
                 "address": addressRef.current.value,
                 "postcode": postcodeRef.current.value,
-                "sellerId": recno.buyerId,
+                "sellerId": recno.sellerId,
                 "status": statusRef.current.value,
                 // "buyerId": recno.buyerId
 
               }
+
+              console.log(tempR)
 
             fetch(`http://localhost:3000/property/${recno.id}`, {
                 method: 'PATCH',
@@ -225,55 +226,6 @@ function SellerProp() {
                 console.error(error);
             });
     
-
-// const [message, setMessage] = useState('');
-
-//   const [updated, setUpdated] = useState(message);
-
-//   const handleChange = (event) => {
-//     setMessage(event.target.value);
-//   };
-
-//   const handleClick = () => {
-//     // 👇 "message" stores input field value
-//     setUpdated(message);
-//   };
-
-//   return (
-//     <div>
-//       <input
-//         type="text"
-//         id="message"
-//         name="message"
-//         onChange={handleChange}
-//         value={message}
-//       />
-
-//       <h2>Message: {message}</h2>
-
-//       <h2>Updated: {updated}</h2>
-
-//       <button onClick={handleClick}>Update</button>
-//     </div>
-//   );
-// }
-            //   fetch(`http://localhost:3000/property`, {
-            //     method: 'PATCH',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(statusChange)
-            // })
-            //     .then((response) => {
-            //         if (!response.ok) {
-            //             alert("An error has occured, unable to read sellers");
-            //             throw response.status;
-            //         } else return response.json();
-            //     })
-            //     .then(pList => { setpropertyList(pList.filter(property => property.sellerId == sellerID)) }) //linking IDs
-            //     .catch(error => {
-            //         console.error(error);
-            //     });
                 setAmend(true)
 
 
@@ -298,41 +250,10 @@ console.log(amendButton.current.value)
 
                 <container id="BbuttonBox">
                     <div class="topSeller">
-                        <Link to={urlAddProperty} id="showButton" className="btn btn-primary "> Add a property </Link>
-                       { propertyList.map(rec => {
-                                isAmend==true?
-                                    <td><div className="topSeller"><button ref={amendButton} value="Amend" className="btn btn-primary" onClick={() => amend(rec)}>Amend</button></div></td>
+                        <Link to={urlAddProperty} id="showButton" className="btn btn-dark "> Add a property </Link>
+                       
 
 
-                                    :
-                                    <td><div className="topSeller"><button ref={amendButton}  value="Save" className="btn btn-primary" onClick={() => amend(rec)}>Save</button></div></td>
-
-
-
-                            })}
-
-{
-
-propertyList.map(rec, index, array => <tr>
-    
-
-
-    {
-        rec.status == "FOR SALE" ?
-            <td><div className="topSeller"><button className="btn btn-primary" onClick={() => withdraw(rec.id)}>Withdraw</button></div></td>
-
-
-            :
-            <td><div className="topSeller"><button className="btn btn-primary" onClick={() => resubmit(rec.id)}>Resubmit</button></div></td>
-
-
-
-    }
-  
-
-</tr>
-)
-}
                     </div>
 
                 </container>
@@ -425,28 +346,25 @@ propertyList.map(rec, index, array => <tr>
                                     <td><span>{rec.bathroom}</span></td>:<td><span> <input type="text" id="recid" ref={bathroomRef}></input> </span></td>
 
                             }
-                            {/* <td id="pList">   <span> <input type="text" id="recid"></input> </span>    </td>
-                            <td id="pList"> <span>{rec.postcode} </span>  <span> <input type="text" id="recid"></input> </span>   </td>
-                            <td id="pList"> <span>{rec.type}</span>  <span> <input type="text" id="recid"></input> </span>    </td>
-                            <td id="pList"> <span>{rec.price}</span>   <span> <input type="text" id="recid"></input> </span>   </td>
-                            <td id="pList"> <span>{rec.bedroom}</span>   <span> <input type="text" id="recid"></input> </span>   </td>
-                            <td id="pList"> <span>{rec.garden} </span>   <span> <input type="text" id="recid"></input> </span>  </td>
-                            <td id="pList"> <span>{rec.sellerId} </span>  <span> <input type="text" id="recid"></input> </span>   </td>
-                            <td id="pList"> <span>{rec.status}</span>  <span> <input type="text" id="recid"></input> </span>    </td>
-                            <td id="pList"> <span>{rec.buyerId}</span>  <span> <input type="text" id="recid"></input> </span>    </td>
- */}
-
-                            {/* <td>    <button className="my-button" onClick={() => withdraw(rec.id)}>
-                                Withdraw
-
-                            </button></td> */}
+                     
                             {
                                 rec.status == "FOR SALE" ?
                                     <td><div className="topSeller"><button className="btn btn-primary" onClick={() => withdraw(rec.id)}>Withdraw</button></div></td>
 
 
                                     :
-                                    <td><div className="topSeller"><button className="btn btn-primary" onClick={() => resubmit(rec.id)}>Resubmit</button></div></td>
+                                    <td><div className="topSeller"><button className="btn btn-success" onClick={() => resubmit(rec.id)}>Resubmit</button></div></td>
+
+
+
+                            }
+                             {
+                                isAmend==true ?
+                                    <td><div className="topSeller"><button className="btn btn-warning" value="Amend" ref={amendButton} onClick={() => amend(rec)}>Amend</button></div></td>
+
+
+                                    :
+                                    <td><div className="topSeller"><button className="btn btn-primary" value="Save" ref={amendButton} onClick={() => amend(rec)}>Save</button></div></td>
 
 
 

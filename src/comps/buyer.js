@@ -116,7 +116,7 @@ showButton.current.value = "Hide"
         <main>
 
 
-      <div class="topSeller">            <Link to="/formBuyer" className = "btn btn-primary"  id="showButton"> Register To Buy </Link>
+      <div class="topSeller">            <Link to="/formBuyer" className = "btn btn-secondary"  id="showButton"> Register To Buy </Link>
 </div> 
 
 

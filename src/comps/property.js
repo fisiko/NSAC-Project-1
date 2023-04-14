@@ -46,7 +46,7 @@ export default function Property() {
 
     function removeR(recno) {
 
-        let tempR = propertyList.filter(recs => recs.id != recno)
+        let tempR = propertyList.filter[(recs => recs.id != recno)]
         let choice = window.confirm("Are you sure you want to delete this record")
         if (choice) {
             setpropertyList(tempR)
@@ -205,7 +205,7 @@ export default function Property() {
 
             <br />
             <br />
-            <div className="topSeller">                    <button className="btn btn-primary" id="showButton" onClick={() => showRec()}>Search For properties</button>
+            <div className="topSeller">                    <button className="btn btn-secondary" id="showButton" onClick={() => showRec()}>Search For properties</button>
             </div>
 
 
@@ -239,7 +239,7 @@ export default function Property() {
 
                         {
                         rec.status=="FOR SALE" ?
-                        <td><div className="topSeller"><button className="btn btn-primary">Book</button></div></td>
+                        <td><div className="topSeller"><button className="btn btn-success">Book</button></div></td>
 
 
                         :
@@ -251,7 +251,7 @@ export default function Property() {
                         {/* <td> {rec.sellerId}  </td> */}
                         {/* <td> {rec.buyerId}  </td> */}
 
-                        <td><button className="btn btn-link">Inspect property</button></td>
+                        <td><button className="btn btn-outline-dark">Inspect property</button></td>
 
 
                     </tr>

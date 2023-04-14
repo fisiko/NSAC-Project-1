@@ -71,7 +71,7 @@ export default function Sell() {
 
 
             <div class="topSeller">
-                <Link to="/form" id="showButton" className="btn btn-primary "> Register as a seller </Link>
+                <Link to="/form" id="showButton" className="btn btn-secondary "> Register as a seller </Link>
 
             </div>
 
@@ -100,7 +100,7 @@ export default function Sell() {
                         <td> {rec.postcode}  </td>
                         <td> {rec.phone}  </td>
                         {/* <td><Link to={urlSellerProperties}>manage properties</Link></td> */}
-                        <td>                        <button className="btn btn-link" onClick={()=> showProperties(rec)}>manage properties</button>
+                        <td>                        <button className="btn-outline-dark" onClick={()=> showProperties(rec)}>manage properties</button>
 </td>
                         {/* <td><input type="button" onClick={() => removeR(rec.id)}/><FontAwesomeIcon icon={faTrash} id="trashCan"/></td> */}
                         <td>    <button className="my-button">

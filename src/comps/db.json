@@ -198,15 +198,15 @@
       "id": 9
     },
     {
-      "type": "h",
-      "price": "gk",
-      "bedroom": "j",
-      "bathroom": "jbk",
-      "garden": "",
-      "address": "lk",
-      "postcode": "",
+      "type": "",
+      "price": "jh",
+      "bedroom": "",
+      "bathroom": "k",
+      "garden": "h",
+      "address": "123",
+      "postcode": "jh",
       "sellerId": "1",
-      "status": "ohj",
+      "status": "j",
       "id": 10
     }
   ],

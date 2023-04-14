@@ -129,7 +129,7 @@ export default function PropForm(){
                     Address: <input  ref={addressInputRef}/><br/>
            Post Code: <input ref={postcodeInputRef}/><br/>  
         </form> <Link className="btn btn-primary"  onClick={() => addR()}> Submit </Link> 
-        <Link to={urlSellerProperty} className="btn btn-primary"> Cancel </Link>
+        <Link to={urlSellerProperty} className="btn btn-block"> Cancel </Link>
 
          </>     )
 

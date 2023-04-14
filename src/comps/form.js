@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import React, { useRef, useState, useEffect } from "react";
 
 
@@ -11,20 +11,40 @@ export default function NewForm() {
     const postcodeInputRef = useRef();
     const phoneInputRef = useRef();
     const navigate = useNavigate()
+    const{sellerID, sellerFirstName, sellerSurname}=useParams()
+    const [sellerList, setSellerList] = useState([])
+    
+
 
     function addR() {
-
-
-        if (forenameInputRef.current.value != "" && surnameInputRef.current.value != "") {
-
-
-            const tempR = {
+        fetch(`http://localhost:3000/seller`)
+            .then((response) => {
+                if (!response.ok) {
+                    alert("An error has occured, unable to read sellers");
+                    throw response.status;
+                } else return response.json();
+            })
+            .then(sellers => { setSellerList(sellers) })
+            .catch(error => {
+                console.error(error);
+            });
+const tempR = {
                 "firstName": forenameInputRef.current.value,
                 "surname": surnameInputRef.current.value,
                 "address": addressInputRef.current.value,
                 "postcode": postcodeInputRef.current.value,
                 "phone": phoneInputRef.current.value
             }
+
+            const compareObjects = (obj1, obj2) =>
+            obj1.forename.toLowerCase() === obj2.forename.toLowerCase() &&
+            obj1.surname.toLowerCase() === obj2.surname.toLowerCase();
+          
+
+        if (forenameInputRef.current.value != "" && surnameInputRef.current.value != "" &&  !sellerList.some(item => compareObjects(item, tempR)) && !sellerList.some(item => item.forename === tempR.forename) &&  !sellerList.some(item => item.surname=== tempR.surname)) {
+
+
+            
 
             fetch("http://localhost:3000/seller", {
                 method: "POST",
