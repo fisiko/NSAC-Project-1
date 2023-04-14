@@ -96,7 +96,7 @@
       "bathroom": 1,
       "garden": 0,
       "sellerId": 1,
-      "status": "SOLD",
+      "status": "Withdrawn",
       "buyerId": 3
     },
     {
@@ -109,7 +109,7 @@
       "bathroom": 1,
       "garden": 0,
       "sellerId": 1,
-      "status": "SOLD",
+      "status": "Withdrawn",
       "buyerId": 3
     },
     {
@@ -147,6 +147,67 @@
       "sellerId": "13",
       "status": "FOR SALE",
       "id": 5
+    },
+    {
+      "type": "h",
+      "price": "h",
+      "bedroom": "h",
+      "bathroom": "h",
+      "garden": "h",
+      "address": "h",
+      "postcode": "h",
+      "sellerId": "h",
+      "status": "h",
+      "id": 6,
+      "buyerId": "h"
+    },
+    {
+      "type": "",
+      "price": "jhkjh",
+      "bedroom": "j",
+      "bathroom": "fd",
+      "garden": "jh",
+      "address": "h",
+      "postcode": "hj",
+      "sellerId": "",
+      "status": "hjk",
+      "id": 7
+    },
+    {
+      "type": "jb",
+      "price": "h",
+      "bedroom": "",
+      "bathroom": "hjk",
+      "garden": "jh",
+      "address": "HJ",
+      "postcode": "KJ",
+      "sellerId": "k",
+      "status": "jh",
+      "id": 8
+    },
+    {
+      "type": "h",
+      "price": "h",
+      "bedroom": "",
+      "bathroom": "jnk",
+      "garden": "hjkb",
+      "address": "kjg",
+      "postcode": "uii",
+      "sellerId": 9,
+      "status": "n",
+      "id": 9
+    },
+    {
+      "type": "h",
+      "price": "gk",
+      "bedroom": "j",
+      "bathroom": "jbk",
+      "garden": "",
+      "address": "lk",
+      "postcode": "",
+      "sellerId": "1",
+      "status": "ohj",
+      "id": 10
     }
   ],
   "buyer": [

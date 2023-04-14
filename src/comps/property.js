@@ -239,7 +239,7 @@ export default function Property() {
 
                         {
                         rec.status=="FOR SALE" ?
-                        <td><div className="topSeller"><button className="btn btn-primary">Available</button></div></td>
+                        <td><div className="topSeller"><button className="btn btn-primary">Book</button></div></td>
 
 
                         :
