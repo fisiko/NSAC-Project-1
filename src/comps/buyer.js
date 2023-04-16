@@ -25,6 +25,11 @@ export default function BuyerData() {
             });
     }, []);
 
+    const showBookings=(buyer)=>{
+        const urlBuyerProperties=`/buyerBookings/${buyer.id}/${buyer.firstName}/${buyer.surname}`
+        navigate(urlBuyerProperties)
+    }
+
 
 
     
@@ -208,6 +213,8 @@ showButton.current.value = "Hide"
                     <th scope="col">Address</th>
                     <th scope="col">Postcode</th>
                     <th scope="col">Phone</th>
+                    <th scope="col">Bookings</th>
+
                     <th></th>
                 </tr>
                 {
@@ -219,6 +226,8 @@ showButton.current.value = "Hide"
                         <td> {rec.address}  </td>
                         <td> {rec.postcode}  </td>
                         <td> {rec.phone}  </td>
+                        <td>                        <button className="btn-outline-dark" onClick={()=> showBookings(rec)}>manage bookings</button>
+</td>
                         {/* <td><input type="button" onClick={() => removeR(rec.id)}/><FontAwesomeIcon icon={faTrash} id="trashCan"/></td> */}
                         <td>    <button className="my-button">
                             <FontAwesomeIcon icon={faTrash} onClick={() => removeR(rec.id)} />

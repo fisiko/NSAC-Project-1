@@ -175,7 +175,7 @@ function SellerProp() {
     const handleStatusChange = (event, ref) => {
         // Update the value in the ref
         ref.current.value = event.target.value;
-      }; // handles the change event of the status <select> element
+    }; // handles the change event of the status <select> element
 
 
 
@@ -183,6 +183,19 @@ function SellerProp() {
 
         if (amendButton.current.value == "Amend") {
             setAmend(false)
+
+            // typeRef.current.value = 5
+            // priceRef.current.value = recno.type
+            // bedroomRef.current.value = recno.type
+            // bathroomRef.current.value = recno.type
+            // gardenRef.current.value = recno.type
+            // addressRef.current.value = recno.type
+            // postcodeRef.current.value = recno.type
+            // recno.sellerId = recno.type
+            // statusRef.current.value = recno.type
+
+
+
         }
         else if (amendButton.current.value == "Save") {
 
@@ -299,65 +312,67 @@ function SellerProp() {
                             {
                                 isAmend == true ?
 
-                                    <td id="pList"> <span>{rec.address} </span> </td> : <td> <span> <input type="text" id="recid" ref={addressRef} onChange={(event) => handleStatusChange(event, addressRef)}></input> </span>  </td>
+                                    <td id="pList"> <span>{rec.address} </span> </td> : <td> <span> <input type="text" id="recid" value={rec.address} ref={addressRef} onChange={(event) => handleStatusChange(event, addressRef)}></input> </span>  </td>
 
                             }
 
                             {
                                 isAmend == true ?
 
-                                    <td><span>{rec.postcode}</span></td> : <td><span> <input type="text" id="recid" ref={postcodeRef} onChange={(event) => handleStatusChange(event, postcodeRef)}></input> </span></td>
+                                    <td><span>{rec.postcode}</span></td> : <td><span> <input type="text" id="recid" ref={postcodeRef} value={rec.postcode}  onChange={(event) => handleStatusChange(event, postcodeRef)}></input> </span></td>
 
                             }
                             {
                                 isAmend == true ?
 
                                     <td><span>{rec.type}</span></td> : <td> <select ref={typeRef} onChange={(event) => handleStatusChange(event, typeRef)}>
-                                    <option value="DETACHED"> Detached </option>
-                                    <option value="SEMI"> SEMI </option>
-                                    <option value="APARTMENT"> Apartment </option>
-            
-            
-                                </select ></td>
+                                        <option value="DETACHED"> Detached </option>
+                                        <option value="SEMI"> SEMI </option>
+                                        <option value="APARTMENT"> Apartment </option>
+
+
+                                    </select ></td>
 
                             }
                             {
                                 isAmend == true ?
 
-                                    <td><span>{rec.price}</span></td> : <td><span>  <input  ref={priceRef}
-                                    type="number" step="10000"
-                                    id="ex1" 
-                                    onChange={(event) => handleStatusChange(event, priceRef)}
-                                    
-                                /> </span></td>
+                                    <td><span>{rec.price}</span></td> : <td><span>  <input ref={priceRef}
+                                        type="number" step="10000"  value={rec.price} 
+                                        id="ex1"
+                                        onChange={(event) => handleStatusChange(event, priceRef)}
+
+                                    /> </span></td>
 
                             }
                             {
                                 isAmend == true ?
 
                                     <td><span>{rec.bedroom}</span></td> : <td>
-                                        
-                                            <input  ref={bedroomRef}
-                                                type="number"
-                                                class="form-control input-sm" id="inputsm"
-                                                onChange={(event) => handleStatusChange(event, bedroomRef)}
-                                                
-                                            />
-                                        </td>
+
+                                        <input ref={bedroomRef}
+                                            type="number"
+                                            value={rec.bedroom} 
+                                            class="form-control input-sm" id="inputsm"
+                                            onChange={(event) => handleStatusChange(event, bedroomRef)}
+
+                                        />
+                                    </td>
 
                             }
                             {
                                 isAmend == true ?
 
-                                    <td><span>{rec.bathroom}</span></td> :<td>
-                                        
-                                    <input  ref={bathroomRef}
-                                        type="number"
-                                        class="form-control input-sm" id="inputsm"
-                                        onChange={(event) => handleStatusChange(event, bathroomRef)}
-                                        
-                                    />
-                                </td>
+                                    <td><span>{rec.bathroom}</span></td> : <td>
+
+                                        <input ref={bathroomRef}
+                                            type="number"
+                                            value={rec.bathroom} 
+                                            class="form-control input-sm" id="inputsm"
+                                            onChange={(event) => handleStatusChange(event, bathroomRef)}
+
+                                        />
+                                    </td>
 
 
                             }
@@ -365,15 +380,16 @@ function SellerProp() {
                             {
                                 isAmend == true ?
 
-                                    <td><span>{rec.garden}</span></td> :<td>
-                                        
-                                    <input  ref={gardenRef}
-                                        type="number"
-                                        class="form-control input-sm" id="inputsm"
-                                        onChange={(event) => handleStatusChange(event, gardenRef)}
-                                        
-                                    />
-                                </td>
+                                    <td><span>{rec.garden}</span></td> : <td>
+
+                                        <input ref={gardenRef}
+                                            type="number"
+                                            value={rec.garden} 
+                                            class="form-control input-sm" id="inputsm"
+                                            onChange={(event) => handleStatusChange(event, gardenRef)}
+
+                                        />
+                                    </td>
 
                             }
 
@@ -387,16 +403,17 @@ function SellerProp() {
 
                                             <option>WITHDRAWN</option>
                                             <option>FOR SALE</option>
-
                                             <option>SOLD</option>
                                         </select>
                                     </td>
 
                             }
-                           <td><span>{rec.buyerId}</span></td> 
+                            <td><span>{rec.buyerId}</span></td>
 
                             {
-                                rec.status == "FOR SALE" ?
+                                rec.status == "FOR SALE" || rec.status == "WITHDRAWN" ?
+
+                                          rec.status == "FOR SALE" ?
                                     <td><div className="topSeller"><button className="btn btn-primary" onClick={() => withdraw(rec.id)}>Withdraw</button></div></td>
 
 
@@ -405,19 +422,36 @@ function SellerProp() {
 
 
 
+                                    :
+                                    <td>  </td>
+
+
                             }
+                         
+
+
                             {
-                                isAmend == true ?
-                                    <td><div className="topSeller"><button className="btn btn-warning" value="Amend" ref={amendButton} onClick={() => amend(rec)}>Amend</button></div></td>
+                                rec.status == "FOR SALE" ?
+
+                                    isAmend == true ?
+                                        <td><div className="topSeller"><button className="btn btn-warning" value="Amend" ref={amendButton} onClick={() => amend(rec)}>Amend</button></div></td>
+
+
+                                        :
+                                        <td><div className="topSeller"><button className="btn btn-primary" value="Save" ref={amendButton} onClick={() => amend(rec)}>Save</button></div>
+
+                                            <div className="topSeller"><button className="btn btn-primary" value="Cancel" onClick={() => canc()}>Cancel</button></div>
+                                        </td>
+
 
 
                                     :
-                                    <td><div className="topSeller"><button className="btn btn-primary" value="Save" ref={amendButton} onClick={() => amend(rec)}>Save</button></div>
+                                    <td>  </td>
 
-                                        <div className="topSeller"><button className="btn btn-primary" value="Cancel" onClick={() => canc()}>Cancel</button></div>
-                                    </td>
 
                             }
+
+
 
                             <td>                    <Link to={urlAddProperty}> Inspect Property </Link>
                             </td>
@@ -432,6 +466,7 @@ function SellerProp() {
                 </table>
                 {/* </div> */}
                 <br />
+                
 
 
                 <br />

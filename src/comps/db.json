@@ -72,7 +72,7 @@
       "bathroom": 1,
       "garden": 0,
       "sellerId": 1,
-      "status": "SOLD",
+      "status": "FOR SALE",
       "buyerId": 3
     },
     {
@@ -85,7 +85,7 @@
       "bathroom": 1,
       "garden": 0,
       "sellerId": 1,
-      "status": "SOLD",
+      "status": "WITHDRAWN",
       "buyerId": 3
     },
     {
@@ -114,52 +114,15 @@
     },
     {
       "type": "DETACHED",
-      "price": "175000",
-      "bedroom": "2",
-      "bathroom": "3",
-      "garden": "true",
-      "address": "47",
-      "postcode": "SS14 1LB",
-      "sellerId": "13",
+      "price": "350000",
+      "bedroom": "3",
+      "bathroom": "1",
+      "garden": "1",
+      "address": "5",
+      "postcode": "N9",
+      "sellerId": "5",
       "status": "FOR SALE",
       "id": 5
-    },
-    {
-      "type": "h",
-      "price": "h",
-      "bedroom": "h",
-      "bathroom": "h",
-      "garden": "h",
-      "address": "h",
-      "postcode": "h",
-      "sellerId": "h",
-      "status": "h",
-      "id": 6,
-      "buyerId": "h"
-    },
-    {
-      "type": "",
-      "price": "jhkjh",
-      "bedroom": "j",
-      "bathroom": "fd",
-      "garden": "jh",
-      "address": "h",
-      "postcode": "hj",
-      "sellerId": "",
-      "status": "hjk",
-      "id": 7
-    },
-    {
-      "type": "jb",
-      "price": "h",
-      "bedroom": "",
-      "bathroom": "hjk",
-      "garden": "jh",
-      "address": "HJ",
-      "postcode": "KJ",
-      "sellerId": "k",
-      "status": "jh",
-      "id": 8
     },
     {
       "type": "DETACHED",
@@ -171,7 +134,7 @@
       "postcode": "E3 tok",
       "sellerId": 9,
       "status": "FOR SALE",
-      "id": 9
+      "id": 6
     },
     {
       "type": "DETACHED",
@@ -183,7 +146,7 @@
       "postcode": "1",
       "sellerId": "3",
       "status": "WITHDRAWN",
-      "id": 12
+      "id": 7
     },
     {
       "type": "DETACHED",
@@ -195,7 +158,7 @@
       "postcode": "E4",
       "sellerId": "3",
       "status": "FOR SALE",
-      "id": 13
+      "id": 8
     },
     {
       "type": "DETACHED",
@@ -207,7 +170,31 @@
       "postcode": "M8",
       "sellerId": "9",
       "status": "FOR SALE",
-      "id": 14
+      "id": 9
+    },
+    {
+      "type": "SEMI",
+      "price": "200000",
+      "bedroom": "2",
+      "bathroom": "1",
+      "garden": "1",
+      "address": "ESSEX",
+      "postcode": "SS8P0",
+      "sellerId": "2",
+      "status": "FOR SALE",
+      "id": 10
+    },
+    {
+      "type": "DETACHED",
+      "price": "400000",
+      "bedroom": "1",
+      "bathroom": "1",
+      "garden": "0",
+      "address": "LONDON",
+      "postcode": "LO9",
+      "sellerId": "1",
+      "status": "SOLD",
+      "id": 11
     }
   ],
   "buyer": [

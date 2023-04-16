@@ -67,12 +67,6 @@ export default function Sell() {
     };
 
 
-    function showRec() {
-
-
-
-    }
-
     return (
         <main>
 

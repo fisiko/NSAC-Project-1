@@ -6,7 +6,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export default function Property() {
 
-    const { propertyID, propertyFirstName, propertySurname } = useParams()
+    const { propertyID, propertyAddress, propertyPostcode } = useParams()
 
     // const urlpropertyProperty=`/propertyProp/${propertyID}/${propertyFirstName}/${propertySurname}`
 
@@ -43,7 +43,10 @@ export default function Property() {
             });
     }, []);
 
-
+    const showProperties=(property)=>{
+        const urlProperty=`/property/${property.id}/${property.address}/${property.postcode}`
+        navigate(urlProperty)
+    }
 
 
 
@@ -147,7 +150,7 @@ export default function Property() {
 
                             <option>DETACHED</option>
                             <option>APARTMENT</option>
-                            {/* <option>Semi-Detached</option> */}
+                            <option>SEMI</option>
 
                         </select>
                     </div>
@@ -155,13 +158,15 @@ export default function Property() {
 
                     <div class="col-md-2">
                         <label for="inputMaxPrice">Max Price</label>
-                        <select ref={inputMaxPriceRef} class="form-control">
+                        <select ref={inputMaxPriceRef} class="form-control" >
                             <option selected>Any</option>
 
                             <option>100000</option>
                             <option>150000</option>
                             <option>200000</option>
                             <option>250000</option>
+                            <option>300000</option>
+                            <option>350000</option>
 
                         </select>
                     </div>
@@ -172,6 +177,7 @@ export default function Property() {
 
                             <option>SOLD</option>
                             <option>FOR SALE</option>
+                            <option>WITHDRAWN</option>
 
                         </select>
                     </div>
@@ -189,7 +195,7 @@ export default function Property() {
 
             <br />
             <br />
-            <div className="topSeller">                    <button className="btn btn-secondary" id="showButton" onClick={() => showRec()}>Search For properties</button>
+            <div className="topSeller"><button className="btn btn-secondary" id="showButton" onClick={() => showRec()}>Search For properties</button>
             </div>
 
 
@@ -225,7 +231,7 @@ export default function Property() {
 
                         {
                         rec.status=="FOR SALE" ?
-                        <td>FOR SALE <button className="btn btn-success">Book</button></td>
+                        <td>FOR SALE <button className="btn btn-success" onClick={()=> showProperties(rec)}>Book</button></td>
 
 
                         :

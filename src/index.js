@@ -16,6 +16,8 @@ import BuyerData from './comps/buyer';
 import PropForm from './comps/propForm';
 import SellerProp from './comps/sellerProp';
 import Property from './comps/property';
+import Booking from './comps/booking';
+import BuyerBookings from './comps/buyerBookings';
 
 
 
@@ -38,7 +40,7 @@ root.render(
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav nav">
               {/* <li class="nav-item"><Link class="nav-link" to="/" >Home</Link></li> */}
-              <li class="nav-item"><Link class="nav-link" to="/aboutus" >About Us</Link></li>
+              {/* <li class="nav-item"><Link class="nav-link" to="/aboutus" >About Us</Link></li> */}
               <li class="nav-item"><Link class="nav-link" to="/buyer" >Buyer</Link></li>
               <li class="nav-item"><Link class="nav-link" to="/seller" >Seller</Link></li>
               <li class="nav-item"><Link class="nav-link" to="/property" >Property</Link></li>
@@ -73,6 +75,10 @@ root.render(
         <Route path="/formBuyer" element={<NewForm2 />} />
         <Route path="/propForm/:sellerID/:sellerFirstName/:sellerSurname" element={<PropForm />} />
         <Route path="/sellerProp/:sellerID/:sellerFirstName/:sellerSurname" element={<SellerProp/>}/>
+        <Route path="/property/:propertyID/:propertyAddress/:propertyPostcode" element={<Booking/>}/>
+        {/* <Route path="/seller/:propertyID/:propertyAddress/:propertyPostcode" element={<Booking/>}/> */}
+        <Route path="/buyerBookings/:buyerID/:buyerFirstName/:buyerSurname" element={<BuyerBookings/>}/>
+
         
                  {/* <Route path="/sellerProp" element={<SellerProp/>}/> */}
 
