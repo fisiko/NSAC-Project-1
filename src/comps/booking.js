@@ -128,7 +128,7 @@ export default function Booking() {
 
 
             <main>
-                <img src="C:\Users\fisik\OneDrive\Desktop\REACT\NSAC-Project-1\src\comps\house.jpg" alt="Example Image" />
+                {/* <img src="src\comps\house.jpg" alt="Example Image" /> */}
                 <h1> Choose your viewing time </h1>
 
                 <h5><b>{propertyAddress} {propertyPostcode}</b> </h5>
@@ -172,9 +172,6 @@ export default function Booking() {
 
                         </select>
                     </div>
-
-
-
 
                 </form>
                     <div className="topSeller" >

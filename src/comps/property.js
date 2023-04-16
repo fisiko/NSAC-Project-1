@@ -241,7 +241,7 @@ export default function Property() {
 
                         {
                             rec.status == "FOR SALE" ?
-                                <td>FOR SALE <button className="btn btn-success" onClick={() => showProperties(rec)}>Book</button></td>
+                                <td>FOR SALE</td>
 
 
                                 :
@@ -249,11 +249,22 @@ export default function Property() {
 
 
                         }
+                        {
+                            rec.status == "FOR SALE" ?
+                                <td> <button className="btn btn-success" onClick={() => showProperties(rec)}>Book</button></td>
+
+
+                                :
+                                <td> </td>
+
+
+                        }
+
 
                         {/* <td> {rec.sellerId}  </td> */}
                         {/* <td> {rec.buyerId}  </td> */}
 
-                        <td><button className="btn btn-outline-dark">Inspect property</button></td>
+                        {/* <td><button className="btn btn-outline-dark">Inspect property</button></td> */}
 
 
                     </tr>
