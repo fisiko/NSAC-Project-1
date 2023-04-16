@@ -43,8 +43,8 @@ export default function Property() {
             });
     }, []);
 
-    const showProperties=(property)=>{
-        const urlProperty=`/property/${property.id}/${property.address}/${property.postcode}`
+    const showProperties = (property) => {
+        const urlProperty = `/property/${property.id}/${property.address}/${property.postcode}`
         navigate(urlProperty)
     }
 
@@ -100,6 +100,16 @@ export default function Property() {
 
 
 
+    }
+
+    const [validated, setValidated] = useState(false)
+    const handleSubmit = (event) => {
+        const form = event.currentTarget
+        if (form.checkValidity() === false) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+        setValidated(true)
     }
 
 
@@ -230,14 +240,14 @@ export default function Property() {
                         <td> {rec.garden}  </td>
 
                         {
-                        rec.status=="FOR SALE" ?
-                        <td>FOR SALE <button className="btn btn-success" onClick={()=> showProperties(rec)}>Book</button></td>
+                            rec.status == "FOR SALE" ?
+                                <td>FOR SALE <button className="btn btn-success" onClick={() => showProperties(rec)}>Book</button></td>
 
 
-                        :
-                            <td> {rec.status}  </td>
+                                :
+                                <td> {rec.status}  </td>
 
-                        
+
                         }
 
                         {/* <td> {rec.sellerId}  </td> */}
