@@ -59,18 +59,26 @@
       "postcode": "CF1 1AA",
       "phone": "1234234",
       "id": 10
+    },
+    {
+      "firstName": "",
+      "surname": "",
+      "address": "",
+      "postcode": "",
+      "phone": "",
+      "id": 11
     }
   ],
   "property": [
     {
       "id": 1,
-      "address": "34 OK Place, OK Town",
-      "postcode": "OK1 1OK",
+      "address": "Somewhere House, Some Street, Some City",
+      "postcode": "SO1 2ME",
       "type": "DETACHED",
-      "price": 100000,
-      "bedroom": 3,
-      "bathroom": 1,
-      "garden": 0,
+      "price": "200000",
+      "bedroom": "1",
+      "bathroom": "1",
+      "garden": "0",
       "sellerId": 1,
       "status": "FOR SALE",
       "buyerId": 3
@@ -79,11 +87,11 @@
       "id": 2,
       "address": "Somewhere House, Some Street, Some City",
       "postcode": "SO1 2ME",
-      "type": "APARTMENT",
-      "price": 200000,
-      "bedroom": 1,
-      "bathroom": 1,
-      "garden": 0,
+      "type": "DETACHED",
+      "price": "200000",
+      "bedroom": "1",
+      "bathroom": "1",
+      "garden": "0",
       "sellerId": 1,
       "status": "WITHDRAWN",
       "buyerId": 3
@@ -109,92 +117,8 @@
       "bathroom": 3,
       "garden": 1,
       "sellerId": 4,
-      "status": "SOLD",
+      "status": "FOR SALE",
       "id": 4
-    },
-    {
-      "type": "DETACHED",
-      "price": "350000",
-      "bedroom": "3",
-      "bathroom": "1",
-      "garden": "1",
-      "address": "5",
-      "postcode": "N9",
-      "sellerId": "5",
-      "status": "FOR SALE",
-      "id": 5
-    },
-    {
-      "type": "DETACHED",
-      "price": "110000",
-      "bedroom": "2",
-      "bathroom": "1",
-      "garden": "1",
-      "address": "The terrace",
-      "postcode": "E3 tok",
-      "sellerId": 9,
-      "status": "FOR SALE",
-      "id": 6
-    },
-    {
-      "type": "DETACHED",
-      "price": "1",
-      "bedroom": "1",
-      "bathroom": "1",
-      "garden": "1",
-      "address": "1",
-      "postcode": "1",
-      "sellerId": "3",
-      "status": "WITHDRAWN",
-      "id": 7
-    },
-    {
-      "type": "DETACHED",
-      "price": "110000",
-      "bedroom": "1",
-      "bathroom": "1",
-      "garden": "1",
-      "address": "67",
-      "postcode": "E4",
-      "sellerId": "3",
-      "status": "FOR SALE",
-      "id": 8
-    },
-    {
-      "type": "DETACHED",
-      "price": "150000",
-      "bedroom": "2",
-      "bathroom": "2",
-      "garden": "1",
-      "address": "Manchester",
-      "postcode": "M8",
-      "sellerId": "9",
-      "status": "FOR SALE",
-      "id": 9
-    },
-    {
-      "type": "SEMI",
-      "price": "200000",
-      "bedroom": "2",
-      "bathroom": "1",
-      "garden": "1",
-      "address": "ESSEX",
-      "postcode": "SS8P0",
-      "sellerId": "2",
-      "status": "FOR SALE",
-      "id": 10
-    },
-    {
-      "type": "DETACHED",
-      "price": "400000",
-      "bedroom": "1",
-      "bathroom": "1",
-      "garden": "0",
-      "address": "LONDON",
-      "postcode": "LO9",
-      "sellerId": "1",
-      "status": "SOLD",
-      "id": 11
     }
   ],
   "buyer": [

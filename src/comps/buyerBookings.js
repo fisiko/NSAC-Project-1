@@ -211,9 +211,6 @@ export default function BuyerBookings() {
 
         }
         else if (amendButton.current.value == "Save") {
-
-
-
             // const statusChange = { status: "Withdrawn" };
 
 

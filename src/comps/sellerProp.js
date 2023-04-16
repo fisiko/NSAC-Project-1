@@ -8,18 +8,12 @@ import React from 'react';
 function SellerProp() {
 
     const { sellerID, sellerFirstName, sellerSurname } = useParams()
-
-    // const urlAddProperty=`/propForm/${seller.id}/${seller.firstName}/${seller.surname}`
     const urlAddProperty = `/propForm/${sellerID}/${sellerFirstName}/${sellerSurname}`
-
-
-    console.log(sellerID, sellerFirstName, sellerSurname)
-
     const [propertyList, setpropertyList] = useState([])
-    // const [uniqueID, setUniqueID] = useState(0)
+    const [propertyList1, setpropertyList1] = useState([])
+
     const navigate = useNavigate()
     const amendButton = useRef();
-
     const idRef = useRef()
     const addressRef = useRef()
     const postcodeRef = useRef()
@@ -28,14 +22,7 @@ function SellerProp() {
     const bedroomRef = useRef()
     const bathroomRef = useRef()
     const gardenRef = useRef()
-    // const sellerIdRef = useRef()
-    const statusRef = useRef(null)
-    // const buyerIdRef = useRef()
-
-
-    // const [jsonData, setJsonData] = useState([]); // JSON data stored in state
-
-
+    const statusRef = useRef()
 
     useEffect(() => {
 
@@ -46,16 +33,13 @@ function SellerProp() {
                     throw response.status;
                 } else return response.json();
             })
-            // .then(sellers => { setpropertyList(sellers) })
             .then(pList => { setpropertyList(pList.filter(property => property.sellerId == sellerID)) }) //linking IDs
             .catch(error => {
                 console.error(error);
             });
     }, []);
 
-    // const selID=1;
     propertyList.filter(property => property.sellerId === sellerID)
-
 
     function removeR(recno) {
 
@@ -87,8 +71,6 @@ function SellerProp() {
 
         const statusChange = { status: "FOR SALE" };
 
-
-
         fetch(`http://localhost:3000/property/${recno}`, {
             method: 'PATCH',
             headers: {
@@ -116,13 +98,7 @@ function SellerProp() {
                 console.error(error);
             });
 
-
-
-
-
     }
-
-
 
     function withdraw(recno) {
 
@@ -159,17 +135,23 @@ function SellerProp() {
             .catch(error => {
                 console.error(error);
             });
-
-
-
     }
 
     const [isAmend, setAmend] = useState(true);
 
     function canc() {
-
-
         setAmend(true)
+        fetch(`http://localhost:3000/property`)
+        .then((response) => {
+            if (!response.ok) {
+                alert("An error has occured, unable to read sellers");
+                throw response.status;
+            } else return response.json();
+        })
+        .then(pList => { setpropertyList(pList.filter(property => property.sellerId == sellerID)) }) //linking IDs
+        .catch(error => {
+            console.error(error);
+        });
     }
 
     const handleStatusChange = (event, ref) => {
@@ -177,31 +159,13 @@ function SellerProp() {
         ref.current.value = event.target.value;
     }; // handles the change event of the status <select> element
 
-
-
     function amend(recno) {
 
         if (amendButton.current.value == "Amend") {
             setAmend(false)
-
-            // typeRef.current.value = 5
-            // priceRef.current.value = recno.type
-            // bedroomRef.current.value = recno.type
-            // bathroomRef.current.value = recno.type
-            // gardenRef.current.value = recno.type
-            // addressRef.current.value = recno.type
-            // postcodeRef.current.value = recno.type
-            // recno.sellerId = recno.type
-            // statusRef.current.value = recno.type
-
-
-
+            setpropertyList(propertyList.filter(property => property.id == recno.id))
         }
         else if (amendButton.current.value == "Save") {
-
-
-
-            // const statusChange = { status: "Withdrawn" };
 
 
             const tempR = {
@@ -251,21 +215,10 @@ function SellerProp() {
 
             setAmend(true)
 
-
         }
-        else if (amendButton.current.value == "Cancel") {
-            setAmend(true)
-
-        }
-
-
-
-
-
 
     }
 
-    // ReactDOM.render(<p>Hallo</p>, document.getElementById('table1'))
     return (
 
         <>
@@ -334,6 +287,7 @@ function SellerProp() {
                                     </select ></td>
 
                             }
+
                             {
                                 isAmend == true ?
 
@@ -412,11 +366,8 @@ function SellerProp() {
 
                             {
                                 rec.status == "FOR SALE" || rec.status == "WITHDRAWN" ?
-
-                                          rec.status == "FOR SALE" ?
+                                    rec.status == "FOR SALE" ?
                                     <td><div className="topSeller"><button className="btn btn-primary" onClick={() => withdraw(rec.id)}>Withdraw</button></div></td>
-
-
                                     :
                                     <td><div className="topSeller"><button className="btn btn-success" onClick={() => resubmit(rec.id)}>Resubmit</button></div></td>
 
@@ -435,30 +386,20 @@ function SellerProp() {
 
                                     isAmend == true ?
                                         <td><div className="topSeller"><button className="btn btn-warning" value="Amend" ref={amendButton} onClick={() => amend(rec)}>Amend</button></div></td>
-
-
                                         :
-                                        <td><div className="topSeller"><button className="btn btn-primary" value="Save" ref={amendButton} onClick={() => amend(rec)}>Save</button></div>
-
-                                            <div className="topSeller"><button className="btn btn-primary" value="Cancel" onClick={() => canc()}>Cancel</button></div>
+                                        <td><div className="topSeller"><button className="btn btn-success" value="Save" ref={amendButton} onClick={() => amend(rec)}>Save</button></div>
+                                            <div className="topSeller"><button className="btn btn-danger" value="Cancel" onClick={() => canc()}>Cancel</button></div>
                                         </td>
-
-
-
                                     :
                                     <td>  </td>
-
-
                             }
 
 
 
                             <td>                    <Link to={urlAddProperty}> Inspect Property </Link>
                             </td>
-                            {/* <td><input type="button" onClick={() => removeR(rec.id)}/><FontAwesomeIcon icon={faTrash} id="trashCan"/></td> */}
                             <td>    <button className="my-button">
                                 <FontAwesomeIcon icon={faTrash} onClick={() => removeR(rec.id)} />
-
                             </button></td>
                         </tr>
                         )
@@ -466,9 +407,6 @@ function SellerProp() {
                 </table>
                 {/* </div> */}
                 <br />
-                
-
-
                 <br />
                 <br />
                 <br />
@@ -490,5 +428,3 @@ function SellerProp() {
 
 
 export default SellerProp;
-
-// 
