@@ -23,10 +23,10 @@ export default function PropForm() {
     const [propertyList, setpropertyList] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:3000/property`)
+        fetch(`http://localhost:8080/property/read`)
             .then((response) => {
                 if (!response.ok) {
-                    alert("An error has occured, unable to read propertys");
+                    alert("An error has occured, unable to read properties");
                     throw response.status;
                 } else return response.json();
             })
@@ -40,13 +40,17 @@ export default function PropForm() {
         const tempR = {
             "type": typeInputRef.current.value,
             "price": priceInputRef.current.value,
-            "bedroom": bedInputRef.current.value,
-            "bathroom": bathInputRef.current.value,
+            "bedrooms": bedInputRef.current.value,
+            "bathrooms": bathInputRef.current.value,
             "garden": gardenInputRef.current.value,
             "address": addressInputRef.current.value,
             "postcode": postcodeInputRef.current.value,
-            "sellerId": sellerID,
-            "status": "FOR SALE"
+            // "sellerId": sellerID,
+            "status": "FOR SALE",
+            "sellers": {
+            "seller_id": sellerID
+            }
+
 
         }
 
@@ -61,7 +65,7 @@ export default function PropForm() {
 
 
 
-                fetch("http://localhost:3000/property", {
+                fetch("http://localhost:8080/property/add", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(tempR)
@@ -70,7 +74,7 @@ export default function PropForm() {
                 })
                     .then((response) => {
                         if (!response.ok) {
-                            alert("An error has occured, unable to read propertys");
+                            alert("An error has occured, unable to read properties");
                             throw response.status;
                         } else navigate(urlSellerProperty);
                     })
@@ -86,7 +90,7 @@ export default function PropForm() {
             }
         } else {
 
-            alert("Sorry, this user is already registered")
+            alert("Sorry, this property is already registered")
         }
 
 

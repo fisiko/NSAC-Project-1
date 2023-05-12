@@ -26,30 +26,30 @@ function SellerProp() {
 
     useEffect(() => {
 
-        fetch(`http://localhost:3000/property`)
+        fetch(`http://localhost:8080/property/read  `)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read sellers");
                     throw response.status;
                 } else return response.json();
             })
-            .then(pList => { setpropertyList(pList.filter(property => property.sellerId == sellerID)) }) //linking IDs
+            .then(pList => { setpropertyList(pList.filter(property => property.sellers.seller_id == sellerID)) }) //linking IDs
             .catch(error => {
                 console.error(error);
             });
     }, []);
 
-    propertyList.filter(property => property.sellerId === sellerID)
+    propertyList.filter(property => property.sellers.seller_id === sellerID)
 
     function removeR(recno) {
 
-        let tempR = propertyList.filter(recs => recs.id != recno)
+        let tempR = propertyList.filter(recs => recs.property_id != recno)
         let choice = window.confirm("Are you sure you want to delete this record")
         if (choice) {
             setpropertyList(tempR)
 
 
-            fetch(`http://localhost:3000/property/${recno}`, {
+            fetch(`http://localhost:8080/property/delete/${recno}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,41 +71,41 @@ function SellerProp() {
 
         const statusChange = { status: "FOR SALE" };
 
-        fetch(`http://localhost:3000/property/${recno}`, {
-            method: 'PATCH',
+        fetch(`http://localhost:8080/property/update/${recno}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(statusChange)
         })
             .then(response => response.json())
-            .then(
+            .then(data => updatePList()
         )
             .catch(error => {
                 console.error('Failed to delete JSON entry:', error);
             });
-
-        fetch(`http://localhost:3000/property`)
-            .then((response) => {
-                if (!response.ok) {
-                    alert("An error has occured, unable to read sellers");
-                    throw response.status;
-                } else return response.json();
-            })
-            // .then(sellers => { setpropertyList(sellers) })
-            .then(pList => { setpropertyList(pList.filter(property => property.sellerId == sellerID)) }) //linking IDs
-            .catch(error => {
-                console.error(error);
-            });
+        //
+        // fetch(`http://localhost:8080/property/read`)
+        //     .then((response) => {
+        //         if (!response.ok) {
+        //             alert("An error has occured, unable to read sellers");
+        //             throw response.status;
+        //         } else return response.json();
+        //     })
+        //     // .then(sellers => { setpropertyList(sellers) })
+        //     .then(pList => { setpropertyList(pList.filter(property => property.sellers.seller_id == sellerID)) }) //linking IDs
+        //     .catch(error => {
+        //         console.error(error);
+        //     });
 
     }
 
     function withdraw(recno) {
 
-        const statusChange = { status: "WITHDRAWN" };
+        const statusChange = { "status": "WITHDRAWN" };
 
-        fetch(`http://localhost:3000/property/${recno}`, {
-            method: 'PATCH',
+        fetch(`http://localhost:8080/property/update/${recno}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -117,13 +117,30 @@ function SellerProp() {
                     throw response.status;
                 } else return response.json();
             })
-            .then()
+            .then(data=> updatePList())
             .catch(error => {
                 console.error('Failed to delete JSON entry:', error);
             });
 
 
-        fetch(`http://localhost:3000/property`)
+
+
+        // fetch(`http://localhost:8080/property/read`)
+        //     .then((response) => {
+        //         if (!response.ok) {
+        //             alert("An error has occured, unable to read sellers");
+        //             throw response.status;
+        //         } else return response.json();
+        //     })
+        //     // .then(sellers => { setpropertyList(sellers) })
+        //     .then(pList => { setpropertyList(pList.filter(property => property.sellers.seller_id == sellerID)) }) //linking IDs
+        //     .catch(error => {
+        //         console.error(error);
+        //     });
+    }
+
+    function updatePList() {
+        fetch(`http://localhost:8080/property/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read sellers");
@@ -131,24 +148,23 @@ function SellerProp() {
                 } else return response.json();
             })
             // .then(sellers => { setpropertyList(sellers) })
-            .then(pList => { setpropertyList(pList.filter(property => property.sellerId == sellerID)) }) //linking IDs
+            .then(pList => { setpropertyList(pList.filter(property => property.sellers.seller_id == sellerID)) }) //linking IDs
             .catch(error => {
                 console.error(error);
             });
     }
-
     const [isAmend, setAmend] = useState(true);
 
     function canc() {
         setAmend(true)
-        fetch(`http://localhost:3000/property`)
+        fetch(`http://localhost:8080/property/read`)
         .then((response) => {
             if (!response.ok) {
                 alert("An error has occured, unable to read sellers");
                 throw response.status;
             } else return response.json();
         })
-        .then(pList => { setpropertyList(pList.filter(property => property.sellerId == sellerID)) }) //linking IDs
+        .then(pList => { setpropertyList(pList.filter(property => property.sellers.seller_id == sellerID)) }) //linking IDs
         .catch(error => {
             console.error(error);
         });
@@ -162,8 +178,8 @@ function SellerProp() {
     function amend(recno) {
 
         if (amendButton.current.value == "Amend") {
+            setpropertyList(propertyList.filter(property => property.property_id == recno.property_id))
             setAmend(false)
-            setpropertyList(propertyList.filter(property => property.id == recno.id))
         }
         else if (amendButton.current.value == "Save") {
 
@@ -171,18 +187,18 @@ function SellerProp() {
             const tempR = {
                 "type": typeRef.current.value,
                 "price": priceRef.current.value,
-                "bedroom": bedroomRef.current.value,
-                "bathroom": bathroomRef.current.value,
+                "bedrooms": bedroomRef.current.value,
+                "bathrooms": bathroomRef.current.value,
                 "garden": gardenRef.current.value,
                 "address": addressRef.current.value,
                 "postcode": postcodeRef.current.value,
-                "sellerId": recno.sellerId,
+                //"sellerId": recno.sellerId,
                 "status": statusRef.current.value
 
             }
 
-            fetch(`http://localhost:3000/property/${recno.id}`, {
-                method: 'PATCH',
+            fetch(`http://localhost:8080/property/update/${recno.property_id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -194,24 +210,11 @@ function SellerProp() {
                         throw response.status;
                     } else return response.json();
                 })
-                .then()
+                .then(data => updatePList())
                 .catch(error => {
                     console.error('Failed to delete JSON entry:', error);
                 });
 
-
-            fetch(`http://localhost:3000/property`)
-                .then((response) => {
-                    if (!response.ok) {
-                        alert("An error has occured, unable to read sellers");
-                        throw response.status;
-                    } else return response.json();
-                })
-                // .then(sellers => { setpropertyList(sellers) })
-                .then(pList => { setpropertyList(pList.filter(property => property.sellerId == sellerID)) }) //linking IDs
-                .catch(error => {
-                    console.error(error);
-                });
 
             setAmend(true)
 
@@ -251,7 +254,7 @@ function SellerProp() {
                         <th scope="col">Garden</th>
                         <th scope="col">Seller ID</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Buyer ID</th>
+                        {/*<th scope="col">Buyer ID</th>*/}
                         <th scope="col">Changes</th>
                         {/* <th scope="col"></th> */}
                         <th></th>
@@ -261,18 +264,18 @@ function SellerProp() {
 
                         propertyList.map(rec => <tr>
 
-                            <td><span>{rec.id}</span></td>
+                            <td><span>{rec.property_id}</span></td>
                             {
                                 isAmend == true ?
 
-                                    <td id="pList"> <span>{rec.address} </span> </td> : <td> <span> <input type="text" id="recid" value={rec.address} ref={addressRef} onChange={(event) => handleStatusChange(event, addressRef)}></input> </span>  </td>
+                                    <td id="pList"> <span>{rec.address} </span> </td> : <td> <span> <input type="text" id="recid" defaultValue={rec.address} ref={addressRef} onChange={(event) => handleStatusChange(event, addressRef)}></input> </span>  </td>
 
                             }
 
                             {
                                 isAmend == true ?
 
-                                    <td><span>{rec.postcode}</span></td> : <td><span> <input type="text" id="recid" ref={postcodeRef} value={rec.postcode}  onChange={(event) => handleStatusChange(event, postcodeRef)}></input> </span></td>
+                                    <td><span>{rec.postcode}</span></td> : <td><span> <input type="text" id="recid" ref={postcodeRef} defaultValue={rec.postcode}  onChange={(event) => handleStatusChange(event, postcodeRef)}></input> </span></td>
 
                             }
                             {
@@ -292,7 +295,7 @@ function SellerProp() {
                                 isAmend == true ?
 
                                     <td><span>{rec.price}</span></td> : <td><span>  <input ref={priceRef}
-                                        type="number" step="10000"  value={rec.price} 
+                                        type="number" step="10000"  defaultValue={rec.price}
                                         id="ex1"
                                         onChange={(event) => handleStatusChange(event, priceRef)}
 
@@ -302,11 +305,11 @@ function SellerProp() {
                             {
                                 isAmend == true ?
 
-                                    <td><span>{rec.bedroom}</span></td> : <td>
+                                    <td><span>{rec.bedrooms}</span></td> : <td>
 
                                         <input ref={bedroomRef}
                                             type="number"
-                                            value={rec.bedroom} 
+                                            defaultValue={rec.bedrooms}
                                             class="form-control input-sm" id="inputsm"
                                             onChange={(event) => handleStatusChange(event, bedroomRef)}
 
@@ -317,11 +320,11 @@ function SellerProp() {
                             {
                                 isAmend == true ?
 
-                                    <td><span>{rec.bathroom}</span></td> : <td>
+                                    <td><span>{rec.bathrooms}</span></td> : <td>
 
                                         <input ref={bathroomRef}
                                             type="number"
-                                            value={rec.bathroom} 
+                                            defaultValue={rec.bathrooms}
                                             class="form-control input-sm" id="inputsm"
                                             onChange={(event) => handleStatusChange(event, bathroomRef)}
 
@@ -338,7 +341,7 @@ function SellerProp() {
 
                                         <input ref={gardenRef}
                                             type="number"
-                                            value={rec.garden} 
+                                            defaultValue={rec.garden}
                                             class="form-control input-sm" id="inputsm"
                                             onChange={(event) => handleStatusChange(event, gardenRef)}
 
@@ -347,7 +350,7 @@ function SellerProp() {
 
                             }
 
-                            <td><span>{rec.sellerId}</span></td>
+                            <td><span>{rec.sellers.seller_id}</span></td>
                             {
                                 isAmend == true ?
 
@@ -362,14 +365,15 @@ function SellerProp() {
                                     </td>
 
                             }
-                            <td><span>{rec.buyerId}</span></td>
+                            {/*<td><span>{rec.buyers.buyer_id}</span></td>*/}
 
                             {
+
                                 rec.status == "FOR SALE" || rec.status == "WITHDRAWN" ?
                                     rec.status == "FOR SALE" ?
-                                    <td><div className="topSeller"><button className="btn btn-primary" onClick={() => withdraw(rec.id)}>Withdraw</button></div></td>
+                                    <td><div className="topSeller"><button className="btn btn-primary" onClick={() => withdraw(rec.property_id)}>Withdraw</button></div></td>
                                     :
-                                    <td><div className="topSeller"><button className="btn btn-success" onClick={() => resubmit(rec.id)}>Resubmit</button></div></td>
+                                    <td><div className="topSeller"><button className="btn btn-success" onClick={() => resubmit(rec.property_id)}>Resubmit</button></div></td>
 
 
 
@@ -399,7 +403,7 @@ function SellerProp() {
                             <td>                    <Link to={urlAddProperty}> Inspect Property </Link>
                             </td>
                             <td>    <button className="my-button">
-                                <FontAwesomeIcon icon={faTrash} onClick={() => removeR(rec.id)} />
+                                <FontAwesomeIcon icon={faTrash} onClick={() => removeR(rec.property_id)} />
                             </button></td>
                         </tr>
                         )

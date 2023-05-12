@@ -15,7 +15,7 @@ export default function NewForm2() {
     const [buyerList, setbuyerList] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:3000/buyer`)
+        fetch(`http://localhost:8080/buyer/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read buyers");
@@ -33,35 +33,31 @@ export default function NewForm2() {
 
         const tempR = {
             "firstName": forenameInputRef.current.value,
-            "surname": surnameInputRef.current.value,
+            "lastName": surnameInputRef.current.value,
             "address": addressInputRef.current.value,
             "postcode": postcodeInputRef.current.value,
             "phone": phoneInputRef.current.value
         }
 
-
         const compareObjects = (obj1, obj2) => {
             const firstNameMatch = obj1.firstName.toLowerCase() === obj2.firstName.toLowerCase();
-            const surNameMatch = obj1.surname.toLowerCase() === obj2.surname.toLowerCase();
+            const surNameMatch = obj1.lastName.toLowerCase() === obj2.lastName.toLowerCase();
             return firstNameMatch && surNameMatch;
         };
 
         if (!buyerList.some(item => compareObjects(item, tempR))) {
             if (forenameInputRef.current.value != "" && surnameInputRef.current.value != "") {
 
-
-
-                fetch("http://localhost:3000/buyer", {
+                fetch("http://localhost:8080/buyer/add", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(tempR)
-
 
                 })
                     .then((response) => {
                         if (!response.ok) {
                             alert("An error has occured, unable to read buyers");
-                            throw response.status;
+                            throw response.status, console.log(tempR);
                         } else navigate("/buyer");
                     })
                     .catch(error => {
@@ -136,21 +132,6 @@ export default function NewForm2() {
                             <label for="InputAddress">Address</label>
                             <input type="text" ref={addressInputRef} class="form-control" id="InputAddress" placeholder="Address" required></input>
 
-                        </div>
-                        {/* <label for="inputAddress">Address</label> */}
-                        {/* <input type="text" class="form-control" id="inputAddress" placeholder="House Number"></input> */}
-                        <div class="form-group  col-md-5 form-control is-valid">
-                            <label for="inputCounty">County</label>
-                            <select id="inputCounty" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>Birmingham</option>
-                                <option>London</option>
-                                <option>Leeds</option>
-                                <option>Manchester</option>
-                                <option>Liverpool</option>
-                                <option>Bristol</option>
-                                <option>Other</option>
-                            </select>
                         </div>
                         <div class="form-group col-md-3 form-control is-valid">
                             <label for="inputPcode">Post Code</label>

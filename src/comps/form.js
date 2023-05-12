@@ -13,11 +13,11 @@ export default function NewForm() {
     const fnameErr = useRef();
     const snameErr = useRef();
     const navigate = useNavigate()
-    const { sellerID, sellerFirstName, sellerSurname } = useParams()
+    const { sellerID, sellerFirstName, sellerLastName } = useParams()
     const [sellerList, setSellerList] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:3000/seller`)
+        fetch(`http://localhost:8080/seller/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read sellers");
@@ -26,6 +26,7 @@ export default function NewForm() {
             })
             .then(sellers => { setSellerList(sellers) })
             .catch(error => {
+                alert("An error has occured, unable to read sellers");
                 console.error(error);
             });
     }, []);
@@ -39,7 +40,7 @@ export default function NewForm() {
 
         const tempR = {
             "firstName": forenameInputRef.current.value,
-            "surname": surnameInputRef.current.value,
+            "lastName": surnameInputRef.current.value,
             "address": addressInputRef.current.value,
             "postcode": postcodeInputRef.current.value,
             "phone": phoneInputRef.current.value
@@ -47,7 +48,7 @@ export default function NewForm() {
 
         const compareObjects = (obj1, obj2) =>{
             const firstNameMatch = obj1.firstName.toLowerCase() === obj2.firstName.toLowerCase();
-            const surNameMatch = obj1.surname.toLowerCase() === obj2.surname.toLowerCase();
+            const surNameMatch = obj1.lastName.toLowerCase() === obj2.lastName.toLowerCase();
             return firstNameMatch && surNameMatch;
 };
 
@@ -59,7 +60,7 @@ export default function NewForm() {
 
 
 
-                fetch("http://localhost:3000/seller", {
+                fetch("http://localhost:8080/seller/add", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(tempR)
@@ -70,7 +71,7 @@ export default function NewForm() {
                         if (!response.ok) {
                             alert("An error has occured, unable to read sellers");
                             throw response.status;
-                        } else navigate("/seller");
+                        } else navigate("/buyer");
                     })
                     .catch(error => {
                         console.error(error);

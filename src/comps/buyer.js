@@ -11,8 +11,11 @@ export default function BuyerData() {
     const [uniqueID, setUniqueID] = useState(0)
     const navigate = useNavigate()
 
+
+
+
     useEffect(() => {
-        fetch(`http://localhost:3000/buyer`)
+        fetch(`http://localhost:8080/buyer/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read buyers");
@@ -26,22 +29,22 @@ export default function BuyerData() {
     }, []);
 
     const showBookings=(buyer)=>{
-        const urlBuyerProperties=`/buyerBookings/${buyer.id}/${buyer.firstName}/${buyer.surname}`
+        const urlBuyerProperties=`/buyerBookings/${buyer.buyer_id}/${buyer.firstName}/${buyer.lastName}`
         navigate(urlBuyerProperties)
     }
 
-
+console.log(buyerList);
 
     
     function removeR(recno) {
 
-        let tempR = buyerList.filter(recs => recs.id != recno)
+        let tempR = buyerList.filter(recs => recs.buyer_id != recno)
         let choice = window.confirm("Are you sure you want to delete this record")
         if (choice) {
             setbuyerList(tempR)
 
 
-            fetch(`http://localhost:3000/buyer/${recno}`, {
+            fetch(`http://localhost:8080/buyer/delete/${recno}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,10 +75,6 @@ export default function BuyerData() {
  
 
         if (forenameInputRef.current.value != "") {
-
-            // setUniqueID( uniqueID + 1)
-          
-
 
             let tempR =
 
@@ -220,9 +219,9 @@ showButton.current.value = "Hide"
                 {
 
                     buyerList.map(rec => <tr>
-                        <td> {rec.id}  </td>
+                        <td> {rec.buyer_id}  </td>
                         <td> {rec.firstName}  </td>
-                        <td> {rec.surname}  </td>
+                        <td> {rec.lastName}  </td>
                         <td> {rec.address}  </td>
                         <td> {rec.postcode}  </td>
                         <td> {rec.phone}  </td>
@@ -230,7 +229,7 @@ showButton.current.value = "Hide"
 </td>
                         {/* <td><input type="button" onClick={() => removeR(rec.id)}/><FontAwesomeIcon icon={faTrash} id="trashCan"/></td> */}
                         <td>    <button className="my-button">
-                            <FontAwesomeIcon icon={faTrash} onClick={() => removeR(rec.id)} />
+                            <FontAwesomeIcon icon={faTrash} onClick={() => removeR(rec.buyer_id)} />
 
                         </button></td>
                     </tr>

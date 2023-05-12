@@ -11,8 +11,6 @@ export default function Sell() {
 
     const{sellerID, sellerFirstName, sellerSurname}=useParams()
 
-    // const urlSellerProperty=`/sellerProp/${sellerID}/${sellerFirstName}/${sellerSurname}`
-
 
     const [sellerList, setSellerList] = useState([])
     // const [uniqueID, setUniqueID] = useState(0)
@@ -20,7 +18,7 @@ export default function Sell() {
 
 
     useEffect(() => {
-        fetch(`http://localhost:3000/seller`)
+        fetch(`http://localhost:8080/seller/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read sellers");
@@ -33,7 +31,7 @@ export default function Sell() {
             });
     }, []);
     const showProperties=(seller)=>{
-        const urlSellerProperties=`/sellerProp/${seller.id}/${seller.firstName}/${seller.surname}`
+        const urlSellerProperties=`/sellerProp/${seller.seller_id}/${seller.firstName}/${seller.lastName}`
         navigate(urlSellerProperties)
     }
     
@@ -42,13 +40,13 @@ export default function Sell() {
 
     function removeR(recno) {
 
-        let tempR = sellerList.filter(recs => recs.id != recno)
+        let tempR = sellerList.filter(recs => recs.seller_id != recno)
         let choice = window.confirm("Are you sure you want to delete this record")
         if (choice) {
             setSellerList(tempR)
 
 
-            fetch(`http://localhost:3000/seller/${recno}`, {
+            fetch(`http://localhost:8080/seller/delete/${recno}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -94,9 +92,9 @@ export default function Sell() {
                 {
 
                     sellerList.map(rec => <tr>
-                        <td> {rec.id}  </td>
+                        <td> {rec.seller_id}  </td>
                         <td> {rec.firstName}  </td>
-                        <td> {rec.surname}  </td>
+                        <td> {rec.lastName}  </td>
                         <td> {rec.address}  </td>
                         <td> {rec.postcode}  </td>
                         <td> {rec.phone}  </td>
@@ -105,7 +103,7 @@ export default function Sell() {
 </td>
                         {/* <td><input type="button" onClick={() => removeR(rec.id)}/><FontAwesomeIcon icon={faTrash} id="trashCan"/></td> */}
                         <td>    <button className="my-button">
-                            <FontAwesomeIcon icon={faTrash} onClick={() => removeR(rec.id)} />
+                            <FontAwesomeIcon icon={faTrash} onClick={() => removeR(rec.seller_id)} />
 
                         </button></td>
                     </tr>
