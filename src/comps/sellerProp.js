@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, Component } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -39,7 +39,7 @@ function SellerProp() {
             });
     }, []);
 
-    propertyList.filter(property => property.sellers.seller_id === sellerID)
+    // propertyList.filter(property => property.sellers.seller_id === sellerID)
 
     function removeR(recno) {
 
@@ -121,7 +121,6 @@ function SellerProp() {
             .catch(error => {
                 console.error('Failed to delete JSON entry:', error);
             });
-
 
 
 

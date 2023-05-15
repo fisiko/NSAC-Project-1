@@ -42,26 +42,24 @@ export default function Sell() {
 
         let tempR = sellerList.filter(recs => recs.seller_id != recno)
         let choice = window.confirm("Are you sure you want to delete this record")
-        if (choice) {
-            setSellerList(tempR)
+        setSellerList(tempR)
 
 
-            fetch(`http://localhost:8080/seller/delete/${recno}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+        fetch(`http://localhost:8080/seller/delete/${recno}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(response => response.json())
+            .then(deletedData => {
+                console.log('JSON entry deleted successfully!', deletedData);
+                // Perform additional actions as needed after successful deletion
             })
-                .then(response => response.json())
-                .then(deletedData => {
-                    console.log('JSON entry deleted successfully!', deletedData);
-                    // Perform additional actions as needed after successful deletion
-                })
-                .catch(error => {
-                    console.error('Failed to delete JSON entry:', error);
-                });
-        }
-        else { }
+            .catch(error => {
+                console.error('Failed to delete JSON entry:', error);
+            });
+
     };
 
 
