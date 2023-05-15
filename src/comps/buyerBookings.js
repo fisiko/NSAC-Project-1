@@ -14,30 +14,19 @@ export default function BuyerBookings() {
 
 
     const [bookingList, setbookingList] = useState([])
-    // const [uniqueID, setUniqueID] = useState(0)
+    const [propertyList, setpropertyList] = useState([])
+
     const navigate = useNavigate()
     const amendButton = useRef();
 
-    const idRef = useRef()
-    const addressRef = useRef()
-    const postcodeRef = useRef()
-    const typeRef = useRef()
-    const priceRef = useRef()
-    const bedroomRef = useRef()
-    const bathroomRef = useRef()
-    const gardenRef = useRef()
-    // const buyerIdRef = useRef()
-    const statusRef = useRef(null)
-    // const buyerIdRef = useRef()
+
 
 
     // const [jsonData, setJsonData] = useState([]); // JSON data stored in state
 
-
-
     useEffect(() => {
 
-        fetch(`http://localhost:3000/booking`)
+        fetch(`http://localhost:8080/booking/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read buyers");
@@ -45,14 +34,34 @@ export default function BuyerBookings() {
                 } else return response.json();
             })
             // .then(buyers => { setbookingList(buyers) })
-            .then(pList => { setbookingList(pList.filter(booking => booking.buyerId == buyerID)) }) //linking IDs
+            .then(pList => { setbookingList(pList.filter(booking => booking.buyers.buyer_id == buyerID)) }) //linking IDs
+            .catch(error => {
+                console.error(error);
+            });
+
+
+        fetch(`http://localhost:8080/property/read  `)
+            .then((response) => {
+                if (!response.ok) {
+                    alert("An error has occured, unable to read sellers");
+                    throw response.status;
+                } else return response.json();
+            })
+            .then(pList => { setpropertyList(pList.filter(property => property.buyers != null && property.buyers.buyer_id == buyerID)) }) //linking IDs
             .catch(error => {
                 console.error(error);
             });
     }, []);
 
+    console.log(bookingList)
+
+
+    // console.log(propertyList)
+    // console.log(buyerID)
+    // console.log(propertyList.filter(property => property.sellers.seller_id == 1))
+    // console.log(propertyList.filter(property => property.buyers.buyer_id == 1))
     // const selID=1;
-    bookingList.filter(booking => booking.buyerId === buyerID)
+    //bookingList.filter(booking => booking.buyerId === buyerID)
 
     const formatDateTime = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
@@ -69,14 +78,14 @@ export default function BuyerBookings() {
       };
 
     function removeR(recno) {
+        console.log(recno)
 
-        let tempR = bookingList.filter(recs => recs.id != recno)
-        let choice = window.confirm("Are you sure you want to delete this record")
+        let tempR = bookingList.filter(recs => recs.booking_id != recno)
+        let choice = window.confirm("Are you sure you want to cancel")
         if (choice) {
             setbookingList(tempR)
 
-
-            fetch(`http://localhost:3000/booking/${recno}`, {
+            fetch(`http://localhost:8080/booking/delete/${recno}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -94,88 +103,12 @@ export default function BuyerBookings() {
         else { }
     };
 
-    function resubmit(recno) {
 
-        const statusChange = { status: "FOR SALE" };
-
-
-
-        fetch(`http://localhost:3000/booking/${recno}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(statusChange)
-        })
-            .then(response => response.json())
-            .then(
-        )
-            .catch(error => {
-                console.error('Failed to delete JSON entry:', error);
-            });
-
-        fetch(`http://localhost:3000/booking`)
-            .then((response) => {
-                if (!response.ok) {
-                    alert("An error has occured, unable to read buyers");
-                    throw response.status;
-                } else return response.json();
-            })
-            // .then(buyers => { setbookingList(buyers) })
-            .then(pList => { setbookingList(pList.filter(booking => booking.buyerId == buyerID)) }) //linking IDs
-            .catch(error => {
-                console.error(error);
-            });
-
-
-
-
-
-    }
 
     
 
 
 
-    function withdraw(recno) {
-
-        const statusChange = { status: "WITHDRAWN" };
-
-        fetch(`http://localhost:3000/booking/${recno}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(statusChange)
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    alert("An error has occured, unable to read buyers");
-                    throw response.status;
-                } else return response.json();
-            })
-            .then()
-            .catch(error => {
-                console.error('Failed to delete JSON entry:', error);
-            });
-
-
-        fetch(`http://localhost:3000/booking`)
-            .then((response) => {
-                if (!response.ok) {
-                    alert("An error has occured, unable to read buyers");
-                    throw response.status;
-                } else return response.json();
-            })
-            // .then(buyers => { setbookingList(buyers) })
-            .then(pList => { setbookingList(pList.filter(booking => booking.buyerId == buyerID)) }) //linking IDs
-            .catch(error => {
-                console.error(error);
-            });
-
-
-
-    }
 
     const [isAmend, setAmend] = useState(true);
 
@@ -191,90 +124,6 @@ export default function BuyerBookings() {
     }; // handles the change event of the status <select> element
 
 
-
-    function amend(recno) {
-
-        if (amendButton.current.value == "Amend") {
-            setAmend(false)
-
-            // typeRef.current.value = 5
-            // priceRef.current.value = recno.type
-            // bedroomRef.current.value = recno.type
-            // bathroomRef.current.value = recno.type
-            // gardenRef.current.value = recno.type
-            // addressRef.current.value = recno.type
-            // postcodeRef.current.value = recno.type
-            // recno.buyerId = recno.type
-            // statusRef.current.value = recno.type
-
-
-
-        }
-        else if (amendButton.current.value == "Save") {
-            // const statusChange = { status: "Withdrawn" };
-
-
-            const tempR = {
-                "type": typeRef.current.value,
-                "price": priceRef.current.value,
-                "bedroom": bedroomRef.current.value,
-                "bathroom": bathroomRef.current.value,
-                "garden": gardenRef.current.value,
-                "address": addressRef.current.value,
-                "postcode": postcodeRef.current.value,
-                "buyerId": recno.buyerId,
-                "status": statusRef.current.value
-
-            }
-
-            fetch(`http://localhost:3000/booking/${recno.id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(tempR)
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        alert("An error has occured, unable to read buyers");
-                        throw response.status;
-                    } else return response.json();
-                })
-                .then()
-                .catch(error => {
-                    console.error('Failed to delete JSON entry:', error);
-                });
-
-
-            fetch(`http://localhost:3000/booking`)
-                .then((response) => {
-                    if (!response.ok) {
-                        alert("An error has occured, unable to read buyers");
-                        throw response.status;
-                    } else return response.json();
-                })
-                // .then(buyers => { setbookingList(buyers) })
-                .then(pList => { setbookingList(pList.filter(booking => booking.buyerId == buyerID)) }) //linking IDs
-                .catch(error => {
-                    console.error(error);
-                });
-
-            setAmend(true)
-
-
-        }
-        else if (amendButton.current.value == "Cancel") {
-            setAmend(true)
-
-        }
-
-
-
-
-
-
-    }
-
     // ReactDOM.render(<p>Hallo</p>, document.getElementById('table1'))
     return (
 
@@ -282,7 +131,7 @@ export default function BuyerBookings() {
 
             <main>
 
-                <h1>Bookingss of <b>{buyerFirstName} {buyerSurname}</b> </h1>
+                <h1>Bookings of <b>{buyerFirstName} {buyerSurname}</b> </h1>
 
 
                 <table class="table1">
@@ -300,22 +149,12 @@ export default function BuyerBookings() {
 
                         bookingList.map(rec => <tr>
 
-                            <td><span>{rec.id}</span></td>
-                            <td><span>{rec.propertyId}</span></td>
-                            <td><span>  {formatDateTime(rec.time)}</span></td>
+                            <td><span>{rec.booking_id}</span></td>
+                            <td><span>{rec.properties.property_id}</span></td>
+                            <td><span>  {formatDateTime(rec.timeslot)}</span></td>
 
-
-
-
-
-
-                            
-                            {/* <td><input type="button" onClick={() => removeR(rec.id)}/><FontAwesomeIcon icon={faTrash} id="trashCan"/></td> */}
-                            <td>    <button className="my-button"onClick={() => removeR(rec.id)} >
-                                Cancel
-                                 
-
-                            </button></td>
+                            <td>    <button className="my-button"onClick={() => removeR(rec.booking_id)} >
+                                Cancel</button></td>
                         </tr>
                         )
                     }
@@ -336,8 +175,62 @@ export default function BuyerBookings() {
                 <br />
 
 
+                <h1>Properties of <b>{buyerFirstName} {buyerSurname}</b> </h1>
 
-            </main>
+
+
+                <table class="table1">
+                    <tr>
+                        <th scope="col">Address</th>
+                        <th scope="col">Postcode</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Bedroom</th>
+                        <th scope="col">Bathroom</th>
+                        <th scope="col">Garden</th>
+
+
+                        <th></th>
+
+                    </tr>
+
+                    {
+
+                        propertyList.map(rec => <tr>
+                                <td> {rec.address}  </td>
+                                <td> {rec.postcode}  </td>
+                                <td> {rec.type}  </td>
+                                <td> {rec.price}  </td>
+                                <td> {rec.bedrooms}  </td>
+                                <td> {rec.bathrooms}  </td>
+                                <td> {rec.garden}  </td>
+                        </tr>)
+
+
+
+
+                    }
+                </table>
+                {/* </div> */}
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+
+
+
+
+
+
+
+
+        </main>
 
 
         </>);

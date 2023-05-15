@@ -84,19 +84,7 @@ function SellerProp() {
             .catch(error => {
                 console.error('Failed to delete JSON entry:', error);
             });
-        //
-        // fetch(`http://localhost:8080/property/read`)
-        //     .then((response) => {
-        //         if (!response.ok) {
-        //             alert("An error has occured, unable to read sellers");
-        //             throw response.status;
-        //         } else return response.json();
-        //     })
-        //     // .then(sellers => { setpropertyList(sellers) })
-        //     .then(pList => { setpropertyList(pList.filter(property => property.sellers.seller_id == sellerID)) }) //linking IDs
-        //     .catch(error => {
-        //         console.error(error);
-        //     });
+
 
     }
 
@@ -123,19 +111,6 @@ function SellerProp() {
             });
 
 
-
-        // fetch(`http://localhost:8080/property/read`)
-        //     .then((response) => {
-        //         if (!response.ok) {
-        //             alert("An error has occured, unable to read sellers");
-        //             throw response.status;
-        //         } else return response.json();
-        //     })
-        //     // .then(sellers => { setpropertyList(sellers) })
-        //     .then(pList => { setpropertyList(pList.filter(property => property.sellers.seller_id == sellerID)) }) //linking IDs
-        //     .catch(error => {
-        //         console.error(error);
-        //     });
     }
 
     function updatePList() {
@@ -176,13 +151,58 @@ function SellerProp() {
 
     function amend(recno) {
 
-        if (amendButton.current.value == "Amend") {
-            setpropertyList(propertyList.filter(property => property.property_id == recno.property_id))
-            setAmend(false)
-        }
-        else if (amendButton.current.value == "Save") {
+        setpropertyList(propertyList.filter(property => property.property_id == recno.property_id))
+        setAmend(false)
 
+        // if (amendButton.current.value == "Amend") {
+        //     setpropertyList(propertyList.filter(property => property.property_id == recno.property_id))
+        //     setAmend(false)
+        //     console.log("hello 5")
+        // }
+        // else if (amendButton.current.value == "Save") {
+        //
+        //
+        //     const tempR = {
+        //         "type": typeRef.current.value,
+        //         "price": priceRef.current.value,
+        //         "bedrooms": bedroomRef.current.value,
+        //         "bathrooms": bathroomRef.current.value,
+        //         "garden": gardenRef.current.value,
+        //         "address": addressRef.current.value,
+        //         "postcode": postcodeRef.current.value,
+        //         //"sellerId": recno.sellerId,
+        //         "status": statusRef.current.value
+        //
+        //     }
+        //     console.log("hello")
+        //     console.log(tempR)
+        //
+        //
+        //     fetch(`http://localhost:8080/property/update/${recno.property_id}`, {
+        //         method: 'PUT',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(tempR)
+        //     })
+        //         .then((response) => {
+        //             if (!response.ok) {
+        //                 alert("An error has occured, unable to read sellers");
+        //                 throw response.status;
+        //             } else return response.json();
+        //         })
+        //         .then(data => updatePList())
+        //         .catch(error => {
+        //             console.error('Failed to delete JSON entry:', error);
+        //         });
+        //
+        //
+        //     setAmend(true)
 
+        // }
+    }
+
+        function save(recno) {
             const tempR = {
                 "type": typeRef.current.value,
                 "price": priceRef.current.value,
@@ -195,6 +215,9 @@ function SellerProp() {
                 "status": statusRef.current.value
 
             }
+            console.log("hello")
+            console.log(tempR)
+
 
             fetch(`http://localhost:8080/property/update/${recno.property_id}`, {
                 method: 'PUT',
@@ -219,7 +242,8 @@ function SellerProp() {
 
         }
 
-    }
+
+
 
     return (
 
@@ -281,9 +305,10 @@ function SellerProp() {
                                 isAmend == true ?
 
                                     <td><span>{rec.type}</span></td> : <td> <select ref={typeRef} onChange={(event) => handleStatusChange(event, typeRef)}>
-                                        <option value="DETACHED"> Detached </option>
-                                        <option value="SEMI"> SEMI </option>
-                                        <option value="APARTMENT"> Apartment </option>
+                                        <option value="DETACHED"> DETACHED </option>
+                                        <option value="SEMI-DETACHED"> SEMI-DETACHED </option>
+                                        <option value="APARTMENT"> APARTMENT </option>
+                                        <option value="APARTMENT"> BUNGALOW </option>
 
 
                                     </select ></td>
@@ -367,6 +392,7 @@ function SellerProp() {
                             {/*<td><span>{rec.buyers.buyer_id}</span></td>*/}
 
                             {
+                                isAmend == true?
 
                                 rec.status == "FOR SALE" || rec.status == "WITHDRAWN" ?
                                     rec.status == "FOR SALE" ?
@@ -376,6 +402,8 @@ function SellerProp() {
 
 
 
+                                    :
+                                    <td>  </td>
                                     :
                                     <td>  </td>
 
@@ -390,7 +418,7 @@ function SellerProp() {
                                     isAmend == true ?
                                         <td><div className="topSeller"><button className="btn btn-warning" value="Amend" ref={amendButton} onClick={() => amend(rec)}>Amend</button></div></td>
                                         :
-                                        <td><div className="topSeller"><button className="btn btn-success" value="Save" ref={amendButton} onClick={() => amend(rec)}>Save</button></div>
+                                        <td><div className="topSeller"><button className="btn btn-success" value="Save" ref={amendButton} onClick={() => save(rec)}>Save</button></div>
                                             <div className="topSeller"><button className="btn btn-danger" value="Cancel" onClick={() => canc()}>Cancel</button></div>
                                         </td>
                                     :

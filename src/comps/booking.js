@@ -13,6 +13,8 @@ export default function Booking() {
     const urlAddProperty = `/propForm/${propertyID}/${propertyAddress}/${propertyPostcode}`
 
     const [propertyList, setpropertyList] = useState([])
+    const [getProperty, setProperty] = useState({})
+
     const [buyerList, setbuyerList] = useState([])
     const navigate = useNavigate()
     const amendButton = useRef();
@@ -29,7 +31,7 @@ export default function Booking() {
 
     useEffect(() => {
 
-        fetch(`http://localhost:3000/property`)
+        fetch(`http://localhost:8080/property/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read propertys");
@@ -37,24 +39,41 @@ export default function Booking() {
                 } else return response.json();
             })
             // .then(propertys => { setpropertyList(propertys) })
-            .then(pList => { setpropertyList(pList.filter(property => property.id == propertyID)) }) //linking IDs
+            .then(pList => { setpropertyList(pList.filter(property => property.property_id == propertyID)) }) //linking IDs
             .catch(error => {
                 console.error(error);
             });
-    }, []);
 
-    fetch(`http://localhost:3000/buyer`)
+        fetch(`http://localhost:8080/property/read/${propertyID}`)
+            .then((response) => {
+                if (!response.ok) {
+                    alert("An error has occured, unable to read propertys");
+                    throw response.status;
+                } else return response.json();
+            })
+            // .then(propertys => { setpropertyList(propertys) })
+            .then(pList => { setProperty(pList) }) //linking IDs
+            .catch(error => {
+                console.error(error);
+            });
+
+
+    fetch(`http://localhost:8080/buyer/read`)
         .then((response) => {
             if (!response.ok) {
-                alert("An error has occured, unable to read propertys");
+                alert("An error has occured, unable to read properties");
                 throw response.status;
             } else return response.json();
         })
-        // .then(propertys => { setpropertyList(propertys) })
         .then(bList => { setbuyerList(bList) }) //linking IDs
         .catch(error => {
             console.error(error);
         });
+
+}, []);
+
+    console.log(buyerList)
+
 
 
 
@@ -63,60 +82,50 @@ export default function Booking() {
             // Update the value in the ref
             ref.current.value = event.target.value;
         }; // handles the change event of the status <select> element
-    
-    
+
 
 
         function addR() {
 
             // console.log(nameRef.current.value+ dateRef.current.value.current.value+ timeRef.current.value)
             console.log(nameRef.current.value, dateRef.current.value, timeRef.current.value)
-            // const tempR = {
+            // const date = new Date();
 
-    
-            // }
-    
-            // const compareObjects = (obj1, obj2) => {
-            //     return obj1.address.toLowerCase() === obj2.address.toLowerCase();
-            // };
-    
-            // if (!propertyList.some(item => compareObjects(item, tempR))) {
-    
-            //     if (postcodeInputRef.current.value != "") {
-    
-    
-    
-    
-            //         fetch("http://localhost:3000/property", {
-            //             method: "POST",
-            //             headers: { "Content-Type": "application/json" },
-            //             body: JSON.stringify(tempR)
-    
-    
-            //         })
-            //             .then((response) => {
-            //                 if (!response.ok) {
-            //                     alert("An error has occured, unable to read propertys");
-            //                     throw response.status;
-            //                 } else navigate(urlSellerProperty);
-            //             })
-            //             .catch(error => {
-            //                 console.error(error);
-            //             });
-    
-    
-            //     }
-            //     else {
-    
-            //         alert("Please enter all details")
-            //     }
-            // } else {
-    
-            //     alert("Sorry, this user is already registered")
-            // }
-    
-    
-    
+
+            // const date = new Date();
+            // const formattedDate = date.toISOString().slice(0, 19).replace('T', ' ');
+            // console.log(formattedDate);
+
+            // const originalDateString = dateRef.current.value + timeRef.current.value;
+            const originalDate = new Date(dateRef.current.value + " " + timeRef.current.value);
+            const formattedDate = originalDate.toISOString().slice(0, 10) + "T" + originalDate.toTimeString().slice(0, 8);
+
+            console.log(formattedDate);
+
+            const person = buyerList.filter(data => data.firstName == nameRef.current.value)
+            const object = Object.assign({}, ...person);
+
+
+            const tempR = {
+                "properties": {"property_id": propertyID},
+                "buyers": {"buyer_id": object.buyer_id},
+                "timeslot": formattedDate
+
+            }
+
+            console.log(JSON.stringify(tempR))
+
+
+
+            fetch("http://localhost:8080/booking/add", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(tempR)
+            })
+
+                .catch(error => {
+                    console.error(error);
+                });
         }
 
 
@@ -128,7 +137,6 @@ export default function Booking() {
 
 
             <main>
-                {/* <img src="src\comps\house.jpg" alt="Example Image" /> */}
                 <h1> Choose your viewing time </h1>
 
                 <h5><b>{propertyAddress} {propertyPostcode}</b> </h5>
@@ -150,7 +158,8 @@ export default function Booking() {
                             }
                         </select >
 
-                        <button>Register now</button>
+                        <Link to="/formBuyer "className="btn btn-block"> Register Now </Link>
+
                     </div>
 
                     <div className="form-group col  topSeller">
@@ -212,7 +221,6 @@ export default function Booking() {
                         )
                     }
                 </table>
-                {/* </div> */}
                 <br />
 
 
