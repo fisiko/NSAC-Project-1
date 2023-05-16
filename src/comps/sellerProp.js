@@ -432,8 +432,8 @@ function SellerProp() {
 
 
 
-                            <td>                    <Link to={urlAddProperty}> Inspect Property </Link>
-                            </td>
+                            {/*<td>                    <Link to={urlAddProperty}> Inspect Property </Link>*/}
+                            {/*</td>*/}
                             <td>    <button className="my-button">
                                 <FontAwesomeIcon icon={faTrash} onClick={() => removeR(rec.property_id)} />
                             </button></td>

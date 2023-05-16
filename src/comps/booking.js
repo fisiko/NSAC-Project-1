@@ -109,7 +109,7 @@ export default function Booking() {
 
             }
 
-            if(nameRef.current.value != "Gen" && timeRef.current.value != "" && dateRef.current.value != ""){
+            if(nameRef.current.value != "" && timeRef.current.value != "" && dateRef.current.value != ""){
 
                 fetch("http://localhost:8080/booking/add", {
                     method: "POST",
