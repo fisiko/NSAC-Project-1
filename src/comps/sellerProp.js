@@ -265,6 +265,9 @@ function SellerProp() {
 
 
                 <table class="table1">
+
+                    <thead>
+
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Address</th>
@@ -283,6 +286,8 @@ function SellerProp() {
                         <th></th>
 
                     </tr>
+                    </thead>
+
                     {
 
                         propertyList.map(rec => <tr>

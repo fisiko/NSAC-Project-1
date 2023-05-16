@@ -10,8 +10,13 @@ export default function NewForm() {
     const addressInputRef = useRef();
     const postcodeInputRef = useRef();
     const phoneInputRef = useRef();
+
     const fnameErr = useRef();
     const snameErr = useRef();
+    const phoneErr = useRef();
+    const addressErr = useRef();
+    const postcodeErr = useRef();
+
     const navigate = useNavigate()
     const { sellerID, sellerFirstName, sellerLastName } = useParams()
     const [sellerList, setSellerList] = useState([])
@@ -55,7 +60,7 @@ export default function NewForm() {
         if (!sellerList.some(item => compareObjects(item, tempR))) {
 
 
-            if (forenameInputRef.current.value != "" && surnameInputRef.current.value != "") {
+            if (forenameInputRef.current.value != "" && surnameInputRef.current.value != "" && phoneInputRef.current.value != "" && addressInputRef.current.value != "" && postcodeInputRef.current.value != "") {
 
 
 
@@ -95,25 +100,33 @@ export default function NewForm() {
                     snameErr.current.style.display = "none";
 
                 }
+                if (phoneInputRef.current.value == "" ){
+                    phoneErr.current.style.display = "block";
+                }
+                else{
+                    phoneErr.current.style.display = "none";
+
+                }
+                if (addressInputRef.current.value == "" ){
+                    addressErr.current.style.display = "block";
+                }
+                else{
+                    addressErr.current.style.display = "none";
+
+                }
+                if (postcodeInputRef.current.value == "" ){
+                    postcodeErr.current.style.display = "block";
+                }
+                else{
+                    postcodeErr.current.style.display = "none";
+
+                }
 
                 
             }
         } else {
 
             alert("Sorry, this user is already registered")
-        }
-
-
-    }
-
-
-
-    function onK(event) {
-        if (event.keyCode === 13) {
-
-            addR()
-
-
         }
 
 
@@ -149,19 +162,25 @@ export default function NewForm() {
                         <div class="form-label form-group form-control">
                             <label for="InputPhone">Phone Number</label>
                             <input type="phone" ref={phoneInputRef} class="form-control" id="InputPhone" placeholder="Phone Number" required></input>
-                     
+                            <div style={{display:"none", color:"red"}} ref={phoneErr}>
+                                Please enter your phone number
+                            </div>
                         </div>
 
                         <div class="form-label form-group form-control">
                             <label for="InputAddress">Address</label>
                             <input type="text" ref={addressInputRef} class="form-control" id="InputAddress" placeholder="Address" required></input>
-
+                            <div style={{display:"none", color:"red"}} ref={addressErr}>
+                                Please enter your address
+                            </div>
                         </div>
 
                         <div class="form-label form-group form-control">
                             <label for="inputPcode">Post Code</label>
                             <input type="text" ref={postcodeInputRef} class="form-control" id="inputPcode validationCustom03" required></input>
-        
+                            <div style={{display:"none", color:"red"}} ref={postcodeErr}>
+                                Please enter your postcode
+                            </div>
                         </div>
 
                         <br/>

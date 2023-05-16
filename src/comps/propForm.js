@@ -14,6 +14,14 @@ export default function PropForm() {
     const addressInputRef = useRef(null);
     const postcodeInputRef = useRef(null);
 
+    const typeErr = useRef(null);
+    const priceErr = useRef(null);
+    const bedErr = useRef(null);
+    const bathErr = useRef(null);
+    const gardenErr = useRef(null);
+    const addressErr = useRef(null);
+    const postcodeErr = useRef(null);
+
     const { sellerID, sellerFirstName, sellerSurname } = useParams()
 
     const urlSellerProperty = `/sellerProp/${sellerID}/${sellerFirstName}/${sellerSurname}`
@@ -60,9 +68,7 @@ export default function PropForm() {
 
         if (!propertyList.some(item => compareObjects(item, tempR))) {
 
-            if (postcodeInputRef.current.value != "") {
-
-
+            if (typeInputRef.current.value != "" && priceInputRef.current.value != "" && bedInputRef.current.value != "" && bathInputRef.current.value != "" && gardenInputRef.current.value != "" && addressInputRef.current.value != "" && postcodeInputRef.current.value != "") {
 
 
                 fetch("http://localhost:8080/property/add", {
@@ -85,9 +91,60 @@ export default function PropForm() {
 
             }
             else {
+                if (typeInputRef.current.value == "" ){
+                    typeErr.current.style.display = "block";
+                }
+                else{
+                    typeErr.current.style.display = "none";
 
-                alert("Please enter all details")
+                }
+
+                if (priceInputRef.current.value == "" ){
+                    priceErr.current.style.display = "block";
+                }
+                else{
+                    priceErr.current.style.display = "none";
+
+                }
+                if (bedInputRef.current.value == "" ){
+                    bedErr.current.style.display = "block";
+                }
+                else{
+                    bedErr.current.style.display = "none";
+
+                }
+                if (bathInputRef.current.value == "" ){
+                    bathErr.current.style.display = "block";
+                }
+                else{
+                    bathErr.current.style.display = "none";
+
+                }
+                if (gardenInputRef.current.value == "" ){
+                    gardenErr.current.style.display = "block";
+                }
+                else{
+                    gardenErr.current.style.display = "none";
+
+                }
+                if (addressInputRef.current.value == "" ){
+                    addressErr.current.style.display = "block";
+                }
+                else{
+                    addressErr.current.style.display = "none";
+
+                }
+                if (postcodeInputRef.current.value == "" ){
+                    postcodeErr.current.style.display = "block";
+                }
+                else{
+                    postcodeErr.current.style.display = "none";
+
+                }
+
+
             }
+
         } else {
 
             alert("Sorry, this property is already registered")
@@ -112,52 +169,175 @@ export default function PropForm() {
 
     return (
         <>
+            <form id="sellerForm">
+                <div className="form-row">
+                    <div className="mx-auto col-10 col-md-8 col-lg-6">
+                        <div className="form-label form-group col form-control">
 
-            <form>
+                            <label htmlFor="propertyType">Type</label>
+                            <select className="form-select" ref={typeInputRef}>
+                                <option value="DETACHED"> Detached </option>
+                                <option value="SEMI"> SEMI </option>
+                                <option value="APARTMENT"> Apartment </option>
+                            </select >
+                            <div style={{display:"none", color:"red"}} ref={typeErr}>
+                                Please enter your first name
+                            </div>
 
-                <div className="form-group col">
+                        </div>
 
-                    <label htmlFor="propertyType">Type</label>
-                    <select className="form-select" ref={typeInputRef}>
-                        <option value="DETACHED"> Detached </option>
-                        <option value="SEMI"> SEMI </option>
-                        <option value="APARTMENT"> Apartment </option>
+                        <div className="form-label form-group col form-control">
+
+                            <label htmlFor="propertyPrice">Price</label><br />
+                            <input  type="text"  className="form-control"  ref={priceInputRef} />
+                            <div style={{display:"none", color:"red"}} ref={priceErr}>
+                                Please enter your price
+                            </div>
+
+                        </div>
+                        <div className="form-label form-group form-control">
+                            <label htmlFor="InputPhone">Bed Rooms:</label>
+
+                            <select className="form-select" ref={bedInputRef}>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+
+                            </select>
+                            <div style={{display:"none", color:"red"}} ref={bedErr}>
+                                Please enter your first name
+                            </div>
+                        </div>
+
+                        <div className="form-label form-group form-control">
+                            <label htmlFor="InputAddress">Bath Rooms:</label>
+
+                            <select className="form-select" ref={bathInputRef}>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+
+                            </select>
+                            <div style={{display:"none", color:"red"}} ref={bathErr}>
+                                Please enter your first name
+                            </div>
+                        </div>
+                        <div className="form-label form-group form-control">
+                            <label htmlFor="InputPhone">Garden:</label>
+                            <select className="form-select" ref={gardenInputRef}>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                            <div style={{display:"none", color:"red"}} ref={gardenErr}>
+                                Please enter your first name
+                            </div>
+                        </div>
+
+                        <div className="form-label form-group col form-control">
+
+                            <label htmlFor="propertyPrice">Address:</label><br />
+                             <input  type="text"  className="form-control" ref={addressInputRef}  />
+                            <div style={{display:"none", color:"red"}} ref={addressErr}>
+                                Please enter your first name
+                            </div>
+
+                        </div>
+
+                        <div className="form-label form-group form-control">
+                            <label htmlFor="inputPcode">Post Code</label>
+                            <input type="text" className="form-control" ref={postcodeInputRef} ></input>
+                            <div style={{display: "none", color: "red"}} ref={postcodeErr}>
+                                Please enter your postcode
+                            </div>
+                        </div>
+
+                        <br/>
+
+                        <Link className="btn btn-success" onClick={() => addR()}> Submit </Link>
+
+                        <Link to="/seller" className="btn btn-outline-danger"> Cancel </Link>
 
 
-                    </select >
+                    </div>
+
+
                 </div>
-                <div className="form-group col">
-                    <label htmlFor="propertyPrice">Price</label>
-                    Price:<input ref={priceInputRef} /><br />
-                </div>
-                Bed Rooms:
-                <select className="form-select" ref={bedInputRef}>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+            </form>
 
-                </select>
-                Bath Rooms:
-                <select className="form-select" ref={bathInputRef}>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
 
-                </select>
-                Garden:
-                <select className="form-select" ref={gardenInputRef}>
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                </select>
+            {/*<form  id="sellerForm">*/}
 
-                Address: <input ref={addressInputRef} /><br />
-                Post Code: <input ref={postcodeInputRef} /><br />
-            </form> <Link className="btn btn-primary" onClick={() => addR()}> Submit </Link>
-            <Link to={urlSellerProperty} className="btn btn-block"> Cancel </Link>
+            {/*    <div className="form-group col">*/}
+
+            {/*        <label htmlFor="propertyType">Type</label>*/}
+            {/*        <select className="form-select" ref={typeInputRef}>*/}
+            {/*            <option value="DETACHED"> Detached </option>*/}
+            {/*            <option value="SEMI"> SEMI </option>*/}
+            {/*            <option value="APARTMENT"> Apartment </option>*/}
+
+
+            {/*        </select >*/}
+            {/*        <div style={{display:"none", color:"red"}} ref={typeErr}>*/}
+            {/*            Please enter your first name*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*    <div className="form-group col">*/}
+            {/*        <label htmlFor="propertyPrice">Price</label>*/}
+            {/*        Price:<input ref={priceInputRef} /><br />*/}
+            {/*        <div style={{display:"none", color:"red"}} ref={priceErr}>*/}
+            {/*            Please enter your price*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*    Bed Rooms:*/}
+            {/*    <select className="form-select" ref={bedInputRef}>*/}
+            {/*        <option>1</option>*/}
+            {/*        <option>2</option>*/}
+            {/*        <option>3</option>*/}
+            {/*        <option>4</option>*/}
+            {/*        <option>5</option>*/}
+
+            {/*    </select>*/}
+            {/*    <div style={{display:"none", color:"red"}} ref={bedErr}>*/}
+            {/*        Please enter your first name*/}
+            {/*    </div>*/}
+            {/*    Bath Rooms:*/}
+            {/*    <select className="form-select" ref={bathInputRef}>*/}
+            {/*        <option>1</option>*/}
+            {/*        <option>2</option>*/}
+            {/*        <option>3</option>*/}
+            {/*        <option>4</option>*/}
+            {/*        <option>5</option>*/}
+
+            {/*    </select>*/}
+            {/*    <div style={{display:"none", color:"red"}} ref={bathErr}>*/}
+            {/*        Please enter your first name*/}
+            {/*    </div>*/}
+            {/*    Garden:*/}
+            {/*    <select className="form-select" ref={gardenInputRef}>*/}
+            {/*        <option value="1">Yes</option>*/}
+            {/*        <option value="0">No</option>*/}
+            {/*    </select>*/}
+            {/*    <div style={{display:"none", color:"red"}} ref={gardenErr}>*/}
+            {/*        Please enter your first name*/}
+            {/*    </div>*/}
+
+            {/*    Address: <input ref={addressInputRef} /><br />*/}
+            {/*    <div style={{display:"none", color:"red"}} ref={addressErr}>*/}
+            {/*        Please enter your first name*/}
+            {/*    </div>*/}
+            {/*     <label htmlFor="InputName">Post Code:</label>*/}
+            {/*    <input ref={postcodeInputRef} /><br />*/}
+            {/*    <div style={{display:"none", color:"red"}} ref={postcodeErr}>*/}
+            {/*        Please enter your first name*/}
+            {/*    </div>*/}
+            {/*</form>
+
+            <Link className="btn btn-primary" onClick={() => addR()}> Submit </Link>
+            <Link to={urlSellerProperty} className="btn btn-block"> Cancel </Link>*/}
 
         </>)
 

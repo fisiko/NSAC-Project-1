@@ -50,11 +50,11 @@ color: whitesmoke;
       text-align: center;
       padding: 14px 30px;
       transition: .25s, box-shadow .15s;
-      border-left: "orange";
+      border-left: orange;
   } 
 
       a:hover {
-          color: "white";
+          color: white;
           background: #4A4860;
           box-shadow: 0px 4px 0px 0px #4A4860;
       
@@ -64,7 +64,7 @@ color: whitesmoke;
     
 }
 #searchBut {
-  color: "orange";
+  color: orange;
   border-radius: 25%;
   
 
