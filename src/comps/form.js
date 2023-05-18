@@ -18,7 +18,6 @@ export default function NewForm() {
     const postcodeErr = useRef();
 
     const navigate = useNavigate()
-    const { sellerID, sellerFirstName, sellerLastName } = useParams()
     const [sellerList, setSellerList] = useState([])
 
     useEffect(() => {
@@ -60,7 +59,7 @@ export default function NewForm() {
         if (!sellerList.some(item => compareObjects(item, tempR))) {
 
 
-            if (forenameInputRef.current.value != "" && surnameInputRef.current.value != "" && phoneInputRef.current.value != "" && addressInputRef.current.value != "" && postcodeInputRef.current.value != "") {
+            if (forenameInputRef.current.value !== "" && surnameInputRef.current.value !== "" && phoneInputRef.current.value !== "" && addressInputRef.current.value !== "" && postcodeInputRef.current.value !== "") {
 
 
 
@@ -85,7 +84,7 @@ export default function NewForm() {
 
             }
             else {
-                if (forenameInputRef.current.value == "" ){
+                if (forenameInputRef.current.value === "" ){
                     fnameErr.current.style.display = "block";
                 }
                 else{
@@ -93,28 +92,28 @@ export default function NewForm() {
 
                 }
 
-                if (surnameInputRef.current.value == "" ){
+                if (surnameInputRef.current.value === "" ){
                     snameErr.current.style.display = "block";
                 }
                 else{
                     snameErr.current.style.display = "none";
 
                 }
-                if (phoneInputRef.current.value == "" ){
+                if (phoneInputRef.current.value === "" ){
                     phoneErr.current.style.display = "block";
                 }
                 else{
                     phoneErr.current.style.display = "none";
 
                 }
-                if (addressInputRef.current.value == "" ){
+                if (addressInputRef.current.value === "" ){
                     addressErr.current.style.display = "block";
                 }
                 else{
                     addressErr.current.style.display = "none";
 
                 }
-                if (postcodeInputRef.current.value == "" ){
+                if (postcodeInputRef.current.value === "" ){
                     postcodeErr.current.style.display = "block";
                 }
                 else{

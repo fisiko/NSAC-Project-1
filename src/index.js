@@ -1,16 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faHouse, faFacebook } from '@fortawesome/free-solid-svg-icons'
+import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Sell from './comps/seller';
-import AboutUs from './comps/Aboutus'
-import Services from './comps/Services'
 import Homepage from './comps/Homepage'
 import PageNotFound from './comps/NotFound';
 import BuyerData from './comps/buyer';
@@ -40,18 +37,13 @@ root.render(
           </button>
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav nav">
-              {/* <li class="nav-item"><Link class="nav-link" to="/" >Home</Link></li> */}
-              {/* <li class="nav-item"><Link class="nav-link" to="/aboutus" >About Us</Link></li> */}
               <li class="nav-item"><Link class="nav-link" to="/buyer" >Buyer</Link></li>
               <li class="nav-item"><Link class="nav-link" to="/seller" >Seller</Link></li>
               <li class="nav-item"><Link class="nav-link" to="/property" >Property</Link></li>
 
             </ul>
-{/*             
-              <button  type="button" class="btn btn-dark" id="searchBut">Login</button> */}
-              <ul class="socials">
-                {/* <li><FontAwesomeIcon icon={faFacebook} /></li> */}
-              </ul>
+
+
             
           </div>
         </div>
@@ -67,7 +59,6 @@ root.render(
 
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/buyer" element={<BuyerData />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/seller" element={<Sell />} />
@@ -77,11 +68,7 @@ root.render(
         <Route path="/propForm/:sellerID/:sellerFirstName/:sellerSurname" element={<PropForm />} />
         <Route path="/sellerProp/:sellerID/:sellerFirstName/:sellerSurname" element={<SellerProp/>}/>
         <Route path="/property/:propertyID/:propertyAddress/:propertyPostcode" element={<Booking/>}/>
-        {/* <Route path="/seller/:propertyID/:propertyAddress/:propertyPostcode" element={<Booking/>}/> */}
         <Route path="/buyerBookings/:buyerID/:buyerFirstName/:buyerSurname" element={<BuyerBookings/>}/>
-
-        
-                 {/* <Route path="/sellerProp" element={<SellerProp/>}/> */}
 
       </Routes></BrowserRouter>
 

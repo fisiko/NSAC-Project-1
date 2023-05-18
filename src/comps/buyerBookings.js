@@ -1,28 +1,14 @@
-import { useState, useRef, useEffect, Component } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import ReactDOM from 'react-dom/client';
+import { useState, useEffect, Component } from "react"
+import { useParams } from "react-router-dom"
+
 import React from 'react';
 
 export default function BuyerBookings() {
 
     const { buyerID, buyerFirstName, buyerSurname } = useParams()
+    const [bookingList, setBookingList] = useState([])
+    const [propertyList, setPropertyList] = useState([])
 
-    // const urlAddbooking=`/propForm/${buyer.id}/${buyer.firstName}/${buyer.surname}`
-    const urlAddbooking = `/buyerBookings/${buyerID}/${buyerFirstName}/${buyerSurname}`
-
-
-    const [bookingList, setbookingList] = useState([])
-    const [propertyList, setpropertyList] = useState([])
-
-    const navigate = useNavigate()
-    const amendButton = useRef();
-
-
-
-
-    // const [jsonData, setJsonData] = useState([]); // JSON data stored in state
 
     useEffect(() => {
 
@@ -33,8 +19,8 @@ export default function BuyerBookings() {
                     throw response.status;
                 } else return response.json();
             })
-            // .then(buyers => { setbookingList(buyers) })
-            .then(pList => { setbookingList(pList.filter(booking => booking.buyers.buyer_id == buyerID)) }) //linking IDs
+            // .then(buyers => { setBookingList(buyers) })
+            .then(pList => { setBookingList(pList.filter(booking => booking.buyers.buyer_id == buyerID)) }) //linking IDs
             .catch(error => {
                 console.error(error);
             });
@@ -47,21 +33,12 @@ export default function BuyerBookings() {
                     throw response.status;
                 } else return response.json();
             })
-            .then(pList => { setpropertyList(pList.filter(property => property.buyers != null && property.buyers.buyer_id == buyerID)) }) //linking IDs
+            .then(pList => { setPropertyList(pList.filter(property => property.buyers != null && property.buyers.buyer_id == buyerID)) }) //linking IDs
             .catch(error => {
                 console.error(error);
             });
     }, []);
 
-    console.log(bookingList)
-
-
-    // console.log(propertyList)
-    // console.log(buyerID)
-    // console.log(propertyList.filter(property => property.sellers.seller_id == 1))
-    // console.log(propertyList.filter(property => property.buyers.buyer_id == 1))
-    // const selID=1;
-    //bookingList.filter(booking => booking.buyerId === buyerID)
 
     const formatDateTime = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
@@ -77,13 +54,14 @@ export default function BuyerBookings() {
         return `${formattedDate} at ${formattedTime}`;
       };
 
+
     function removeR(recno) {
         console.log(recno)
 
         let tempR = bookingList.filter(recs => recs.booking_id != recno)
         let choice = window.confirm("Are you sure you want to cancel")
         if (choice) {
-            setbookingList(tempR)
+            setBookingList(tempR)
 
             fetch(`http://localhost:8080/booking/delete/${recno}`, {
                 method: 'DELETE',
@@ -103,25 +81,6 @@ export default function BuyerBookings() {
         else { }
     };
 
-
-
-    
-
-
-
-
-    const [isAmend, setAmend] = useState(true);
-
-    function canc() {
-
-
-        setAmend(true)
-    }
-
-    const handleStatusChange = (event, ref) => {
-        // Update the value in the ref
-        ref.current.value = event.target.value;
-    }; // handles the change event of the status <select> element
 
 
     // ReactDOM.render(<p>Hallo</p>, document.getElementById('table1'))

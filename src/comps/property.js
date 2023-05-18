@@ -1,19 +1,11 @@
 import { useState, useRef, useEffect } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import {  useNavigate, useParams } from "react-router-dom"
 
 
 export default function Property() {
 
-    const { propertyID, propertyAddress, propertyPostcode } = useParams()
-
-    // const urlpropertyProperty=`/propertyProp/${propertyID}/${propertyFirstName}/${propertySurname}`
-
-
-    const [propertyList, setpropertyList] = useState([])
+    const [propertyList, setPropertyList] = useState([])
     const navigate = useNavigate()
-    const [propCriteria, setPropCriteria] = useState([])
 
 
     const inputGardenRef = useRef(null);
@@ -33,22 +25,22 @@ export default function Property() {
                     throw response.status;
                 } else return response.json();
             })
-            // .then(sellers => { setpropertyList(sellers) })
+            // .then(sellers => { setPropertyList(sellers) })
             .then(
                 pList => {
-                    setpropertyList(pList)
+                    setPropertyList(pList)
                 }) //linking IDs
             .catch(error => {
                 console.error(error);
             });
     }, []);
 
+
     const showProperties = (property) => {
         const urlProperty = `/property/${property.property_id}/${property.address}/${property.postcode}`
         navigate(urlProperty)
     }
 
-console.log(propertyList)
 
     function showRec() {
 
@@ -72,10 +64,9 @@ console.log(propertyList)
                     throw response.status;
                 } else return response.json();
             })
-            // .then(sellers => { setpropertyList(sellers) })
             .then(
                 pList => {
-                    setpropertyList(pList.filter(property => {
+                    setPropertyList(pList.filter(property => {
                         return (
                             (tempR.garden === 'Any' || property.garden == tempR.garden) &&
                             (tempR.bedroom === 'Any' || property.bedrooms == tempR.bedroom) &&
@@ -86,32 +77,12 @@ console.log(propertyList)
 
                         );
                     }));
-                }) //linking IDs
+                })
             .catch(error => {
                 console.error(error);
             });
 
-
-
-
-
-
-
-
-
-
     }
-
-    const [validated, setValidated] = useState(false)
-    const handleSubmit = (event) => {
-        const form = event.currentTarget
-        if (form.checkValidity() === false) {
-            event.preventDefault()
-            event.stopPropagation()
-        }
-        setValidated(true)
-    }
-
 
 
     return (
@@ -192,13 +163,7 @@ console.log(propertyList)
                         </select>
                     </div>
 
-
-
                 </div>
-
-
-
-
 
 
             </form>
@@ -261,17 +226,11 @@ console.log(propertyList)
                         }
 
 
-                        {/* <td> {rec.sellerId}  </td> */}
-                        {/* <td> {rec.buyerId}  </td> */}
-
-                        {/* <td><button className="btn btn-outline-dark">Inspect property</button></td> */}
-
 
                     </tr>
                     )
                 }
             </table>
-            {/* </div> */}
             <br />
 
 

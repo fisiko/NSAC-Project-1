@@ -8,7 +8,6 @@ import{Link, useNavigate} from "react-router-dom"
 export default function BuyerData() {
 
     const [buyerList, setbuyerList] = useState([])
-    const [uniqueID, setUniqueID] = useState(0)
     const navigate = useNavigate()
 
 
@@ -38,7 +37,7 @@ console.log(buyerList);
     
     function removeR(recno) {
 
-        let tempR = buyerList.filter(recs => recs.buyer_id != recno)
+        let tempR = buyerList.filter(recs => recs.buyer_id !== recno)
         let choice = window.confirm("Are you sure you want to delete this record")
         if (choice) {
             setbuyerList(tempR)
@@ -83,8 +82,8 @@ console.log(buyerList);
                 "surname": surnameInputRef.current.value,
                 "address": addressInputRef.current.value,
                 "postcode": postcodeInputRef.current.value,
-                "phone": phoneInputRef.current.value,
-                "id": buyerList.length + uniqueID + 1
+                "phone": phoneInputRef.current.value
+
             }
             // tempR = tempR.map((item, index) => {return {...item, regno: index}})
             setbuyerList([...buyerList, tempR])
@@ -100,34 +99,6 @@ console.log(buyerList);
 
     }
 
-
-
-    function onK(event) {
-        if (event.keyCode === 13) {
-
-            addR()
-
-
-        }
-
-
-    }
-
-let count = 0
-    function formDisplay(){
-        if (count % 2 == 0){
-showButton.current.value = "Hide"
-            
-            bForm.current.style.display = "block"
-            count ++
-        }
-        else {
-            count ++
-            showButton.current.value = "Add Record"
-            bForm.current.style.display = "none"
-        }
-        
-    }
 
 
 

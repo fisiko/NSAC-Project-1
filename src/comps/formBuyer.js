@@ -64,7 +64,7 @@ export default function NewForm2() {
                     .then((response) => {
                         if (!response.ok) {
                             alert("An error has occured, unable to read buyers");
-                            throw response.status, console.log(tempR);
+                            throw response.status;
                         } else navigate("/buyer");
                     })
                     .catch(error => {

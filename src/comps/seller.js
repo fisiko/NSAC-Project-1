@@ -1,19 +1,13 @@
-import { useState, useRef, useEffect } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
-
-// import { faTrash } from '@fortawesome/fontawesome-svg-core/import.macro'
-
+import { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function Sell() {
 
-    const{sellerID, sellerFirstName, sellerSurname}=useParams()
-
 
     const [sellerList, setSellerList] = useState([])
-    // const [uniqueID, setUniqueID] = useState(0)
     const navigate = useNavigate()
 
 
@@ -41,7 +35,7 @@ export default function Sell() {
     function removeR(recno) {
 
         let tempR = sellerList.filter(recs => recs.seller_id != recno)
-        let choice = window.confirm("Are you sure you want to delete this record")
+        //let choice = window.confirm("Are you sure you want to delete this record")
         setSellerList(tempR)
 
 
@@ -96,10 +90,8 @@ export default function Sell() {
                         <td> {rec.address}  </td>
                         <td> {rec.postcode}  </td>
                         <td> {rec.phone}  </td>
-                        {/* <td><Link to={urlSellerProperties}>manage properties</Link></td> */}
                         <td>                        <button className="btn-outline-dark" onClick={()=> showProperties(rec)}>manage properties</button>
 </td>
-                        {/* <td><input type="button" onClick={() => removeR(rec.id)}/><FontAwesomeIcon icon={faTrash} id="trashCan"/></td> */}
                         <td>    <button className="my-button">
                             <FontAwesomeIcon icon={faTrash} onClick={() => removeR(rec.seller_id)} />
 
@@ -108,7 +100,6 @@ export default function Sell() {
                     )
                 }
             </table>
-            {/* </div> */}
             <br />
 
 

@@ -1,20 +1,16 @@
 import { useState, useRef, useEffect } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import ReactDOM from 'react-dom/client';
 import React from 'react';
 
 function SellerProp() {
 
     const { sellerID, sellerFirstName, sellerSurname } = useParams()
     const urlAddProperty = `/propForm/${sellerID}/${sellerFirstName}/${sellerSurname}`
-    const [propertyList, setpropertyList] = useState([])
-    const [propertyList1, setpropertyList1] = useState([])
+    const [propertyList, setPropertyList] = useState([])
 
-    const navigate = useNavigate()
     const amendButton = useRef();
-    const idRef = useRef()
     const addressRef = useRef()
     const postcodeRef = useRef()
     const typeRef = useRef()
@@ -33,20 +29,18 @@ function SellerProp() {
                     throw response.status;
                 } else return response.json();
             })
-            .then(pList => { setpropertyList(pList.filter(property => property.sellers.seller_id == sellerID)) }) //linking IDs
+            .then(pList => { setPropertyList(pList.filter(property => property.sellers.seller_id == sellerID)) }) //linking IDs
             .catch(error => {
                 console.error(error);
             });
-    }, []);
-
-    // propertyList.filter(property => property.sellers.seller_id === sellerID)
+    }, [sellerID]);
 
     function removeR(recno) {
 
         let tempR = propertyList.filter(recs => recs.property_id != recno)
         let choice = window.confirm("Are you sure you want to delete this record")
         if (choice) {
-            setpropertyList(tempR)
+            setPropertyList(tempR)
 
 
             fetch(`http://localhost:8080/property/delete/${recno}`, {
@@ -121,8 +115,8 @@ function SellerProp() {
                     throw response.status;
                 } else return response.json();
             })
-            // .then(sellers => { setpropertyList(sellers) })
-            .then(pList => { setpropertyList(pList.filter(property => property.sellers.seller_id == sellerID)) }) //linking IDs
+            // .then(sellers => { setPropertyList(sellers) })
+            .then(pList => { setPropertyList(pList.filter(property => property.sellers.seller_id == sellerID)) }) //linking IDs
             .catch(error => {
                 console.error(error);
             });
@@ -138,7 +132,7 @@ function SellerProp() {
                 throw response.status;
             } else return response.json();
         })
-        .then(pList => { setpropertyList(pList.filter(property => property.sellers.seller_id == sellerID)) }) //linking IDs
+        .then(pList => { setPropertyList(pList.filter(property => property.sellers.seller_id == sellerID)) }) //linking IDs
         .catch(error => {
             console.error(error);
         });
@@ -151,55 +145,10 @@ function SellerProp() {
 
     function amend(recno) {
 
-        setpropertyList(propertyList.filter(property => property.property_id == recno.property_id))
+        setPropertyList(propertyList.filter(property => property.property_id == recno.property_id))
         setAmend(false)
 
-        // if (amendButton.current.value == "Amend") {
-        //     setpropertyList(propertyList.filter(property => property.property_id == recno.property_id))
-        //     setAmend(false)
-        //     console.log("hello 5")
-        // }
-        // else if (amendButton.current.value == "Save") {
-        //
-        //
-        //     const tempR = {
-        //         "type": typeRef.current.value,
-        //         "price": priceRef.current.value,
-        //         "bedrooms": bedroomRef.current.value,
-        //         "bathrooms": bathroomRef.current.value,
-        //         "garden": gardenRef.current.value,
-        //         "address": addressRef.current.value,
-        //         "postcode": postcodeRef.current.value,
-        //         //"sellerId": recno.sellerId,
-        //         "status": statusRef.current.value
-        //
-        //     }
-        //     console.log("hello")
-        //     console.log(tempR)
-        //
-        //
-        //     fetch(`http://localhost:8080/property/update/${recno.property_id}`, {
-        //         method: 'PUT',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify(tempR)
-        //     })
-        //         .then((response) => {
-        //             if (!response.ok) {
-        //                 alert("An error has occured, unable to read sellers");
-        //                 throw response.status;
-        //             } else return response.json();
-        //         })
-        //         .then(data => updatePList())
-        //         .catch(error => {
-        //             console.error('Failed to delete JSON entry:', error);
-        //         });
-        //
-        //
-        //     setAmend(true)
 
-        // }
     }
 
         function save(recno) {
@@ -211,7 +160,6 @@ function SellerProp() {
                 "garden": gardenRef.current.value,
                 "address": addressRef.current.value,
                 "postcode": postcodeRef.current.value,
-                //"sellerId": recno.sellerId,
                 "status": statusRef.current.value
 
             }
@@ -280,9 +228,7 @@ function SellerProp() {
                         <th scope="col">Garden</th>
                         <th scope="col">Seller ID</th>
                         <th scope="col">Status</th>
-                        {/*<th scope="col">Buyer ID</th>*/}
                         <th scope="col">Changes</th>
-                        {/* <th scope="col"></th> */}
                         <th></th>
 
                     </tr>
