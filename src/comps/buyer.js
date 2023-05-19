@@ -67,13 +67,11 @@ console.log(buyerList);
     const postcodeInputRef = useRef();
     const phoneInputRef = useRef();
     const bForm = useRef();
-    const showButton = useRef();
-  
 
     function addR() {
  
 
-        if (forenameInputRef.current.value != "") {
+        if (forenameInputRef.current.value !== "") {
 
             let tempR =
 

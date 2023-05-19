@@ -37,7 +37,7 @@ function SellerProp() {
 
     function removeR(recno) {
 
-        let tempR = propertyList.filter(recs => recs.property_id != recno)
+        let tempR = propertyList.filter(recs => recs.property_id !== recno)
         let choice = window.confirm("Are you sure you want to delete this record")
         if (choice) {
             setPropertyList(tempR)
@@ -240,20 +240,20 @@ function SellerProp() {
 
                             <td><span>{rec.property_id}</span></td>
                             {
-                                isAmend == true ?
+                                isAmend === true ?
 
                                     <td id="pList"> <span>{rec.address} </span> </td> : <td> <span> <input type="text" id="recid" defaultValue={rec.address} ref={addressRef} onChange={(event) => handleStatusChange(event, addressRef)}></input> </span>  </td>
 
                             }
 
                             {
-                                isAmend == true ?
+                                isAmend === true ?
 
                                     <td><span>{rec.postcode}</span></td> : <td><span> <input type="text" id="recid" ref={postcodeRef} defaultValue={rec.postcode}  onChange={(event) => handleStatusChange(event, postcodeRef)}></input> </span></td>
 
                             }
                             {
-                                isAmend == true ?
+                                isAmend === true ?
 
                                     <td><span>{rec.type}</span></td> : <td> <select ref={typeRef} onChange={(event) => handleStatusChange(event, typeRef)}>
                                         <option value="DETACHED"> DETACHED </option>
@@ -267,7 +267,7 @@ function SellerProp() {
                             }
 
                             {
-                                isAmend == true ?
+                                isAmend === true ?
 
                                     <td><span>{rec.price}</span></td> : <td><span>  <input ref={priceRef}
                                         type="number" step="10000"  defaultValue={rec.price}
@@ -278,7 +278,7 @@ function SellerProp() {
 
                             }
                             {
-                                isAmend == true ?
+                                isAmend === true ?
 
                                     <td><span>{rec.bedrooms}</span></td> : <td>
 
@@ -293,7 +293,7 @@ function SellerProp() {
 
                             }
                             {
-                                isAmend == true ?
+                                isAmend === true ?
 
                                     <td><span>{rec.bathrooms}</span></td> : <td>
 
@@ -310,7 +310,7 @@ function SellerProp() {
                             }
 
                             {
-                                isAmend == true ?
+                                isAmend === true ?
 
                                     <td><span>{rec.garden}</span></td> : <td>
 
@@ -327,7 +327,7 @@ function SellerProp() {
 
                             <td><span>{rec.sellers.seller_id}</span></td>
                             {
-                                isAmend == true ?
+                                isAmend === true ?
 
                                     <td>
                                         <span>{rec.status}</span></td> : <td>

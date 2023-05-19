@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect, Component } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { useState, useRef, useEffect } from "react"
+import { Link, useParams } from "react-router-dom"
 import React from 'react';
 
 
@@ -62,7 +62,7 @@ export default function Booking() {
 
             console.log(formattedDate);
 
-            const person = buyerList.filter(data => data.firstName == nameRef.current.value)
+            const person = buyerList.filter(data => data.firstName === nameRef.current.value)
             const object = Object.assign({}, ...person);
 
 
@@ -73,7 +73,7 @@ export default function Booking() {
 
             }
 
-            if(nameRef.current.value != "" && timeRef.current.value != "" && dateRef.current.value != ""){
+            if(nameRef.current.value !== "" && timeRef.current.value !== "" && dateRef.current.value !== ""){
 
                 fetch("http://localhost:8080/booking/add", {
                     method: "POST",
@@ -87,7 +87,7 @@ export default function Booking() {
             }
             else {
                 Event.preventDefault();
-                if (nameRef.current.value == "" ){
+                if (nameRef.current.value === "" ){
                     nameErr.current.style.display = "block";
                 }
                 else{
@@ -95,14 +95,14 @@ export default function Booking() {
 
                 }
 
-                if (dateRef.current.value == "" ){
+                if (dateRef.current.value === "" ){
                     dateErr.current.style.display = "block";
                 }
                 else{
                     dateErr.current.style.display = "none";
 
                 }
-                if (timeRef.current.value == "" ){
+                if (timeRef.current.value === "" ){
                     timeErr.current.style.display = "block";
                 }
                 else{

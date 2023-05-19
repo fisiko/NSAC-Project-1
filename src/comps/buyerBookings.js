@@ -1,4 +1,4 @@
-import { useState, useEffect, Component } from "react"
+import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 
 import React from 'react';
@@ -37,8 +37,9 @@ export default function BuyerBookings() {
             .catch(error => {
                 console.error(error);
             });
-    }, []);
+    }, [buyerID]);
 
+    console.log(bookingList);
 
     const formatDateTime = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
@@ -58,7 +59,7 @@ export default function BuyerBookings() {
     function removeR(recno) {
         console.log(recno)
 
-        let tempR = bookingList.filter(recs => recs.booking_id != recno)
+        let tempR = bookingList.filter(recs => recs.booking_id !== recno)
         let choice = window.confirm("Are you sure you want to cancel")
         if (choice) {
             setBookingList(tempR)
@@ -132,56 +133,6 @@ export default function BuyerBookings() {
                 <br />
                 <br />
                 <br />
-
-
-                <h1>Properties of <b>{buyerFirstName} {buyerSurname}</b> </h1>
-
-
-
-                <table class="table1">
-                    <tr>
-                        <th scope="col">Address</th>
-                        <th scope="col">Postcode</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Bedroom</th>
-                        <th scope="col">Bathroom</th>
-                        <th scope="col">Garden</th>
-
-
-                        <th></th>
-
-                    </tr>
-
-                    {
-
-                        propertyList.map(rec => <tr>
-                                <td> {rec.address}  </td>
-                                <td> {rec.postcode}  </td>
-                                <td> {rec.type}  </td>
-                                <td> {rec.price}  </td>
-                                <td> {rec.bedrooms}  </td>
-                                <td> {rec.bathrooms}  </td>
-                                <td> {rec.garden}  </td>
-                        </tr>)
-
-
-
-
-                    }
-                </table>
-                {/* </div> */}
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-
 
 
 

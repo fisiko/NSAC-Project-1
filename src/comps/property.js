@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react"
-import {  useNavigate, useParams } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 
 
 export default function Property() {
@@ -68,12 +68,12 @@ export default function Property() {
                 pList => {
                     setPropertyList(pList.filter(property => {
                         return (
-                            (tempR.garden === 'Any' || property.garden == tempR.garden) &&
-                            (tempR.bedroom === 'Any' || property.bedrooms == tempR.bedroom) &&
-                            (tempR.bath === 'Any' || property.bathrooms == tempR.bath) &&
-                            (tempR.type === 'Any' || property.type == tempR.type) &&
+                            (tempR.garden === 'Any' || property.garden === tempR.garden) &&
+                            (tempR.bedroom === 'Any' || property.bedrooms === tempR.bedroom) &&
+                            (tempR.bath === 'Any' || property.bathrooms === tempR.bath) &&
+                            (tempR.type === 'Any' || property.type === tempR.type) &&
                             (tempR.maxprice === 'Any' || property.price <= parseInt(tempR.maxprice)) &&
-                            (tempR.status === 'Any' || property.status == tempR.status)
+                            (tempR.status === 'Any' || property.status === tempR.status)
 
                         );
                     }));
@@ -205,7 +205,7 @@ export default function Property() {
                         <td> {rec.garden}  </td>
 
                         {
-                            rec.status == "FOR SALE" ?
+                            rec.status === "FOR SALE" ?
                                 <td>FOR SALE</td>
 
 
@@ -215,7 +215,7 @@ export default function Property() {
 
                         }
                         {
-                            rec.status == "FOR SALE" ?
+                            rec.status === "FOR SALE" ?
                                 <td> <button className="btn btn-success" onClick={() => showProperties(rec)}>Book</button></td>
 
 

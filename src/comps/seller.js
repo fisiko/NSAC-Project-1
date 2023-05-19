@@ -34,7 +34,7 @@ export default function Sell() {
 
     function removeR(recno) {
 
-        let tempR = sellerList.filter(recs => recs.seller_id != recno)
+        let tempR = sellerList.filter(recs => recs.seller_id !== recno)
         //let choice = window.confirm("Are you sure you want to delete this record")
         setSellerList(tempR)
 

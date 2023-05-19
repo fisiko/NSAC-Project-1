@@ -53,7 +53,7 @@ export default function NewForm2() {
         };
 
         if (!buyerList.some(item => compareObjects(item, tempR))) {
-            if (forenameInputRef.current.value != "" && surnameInputRef.current.value != "" && phoneInputRef.current.value != "" && addressInputRef.current.value != "" && postcodeInputRef.current.value != "") {
+            if (forenameInputRef.current.value !== "" && surnameInputRef.current.value !== "" && phoneInputRef.current.value !== "" && addressInputRef.current.value !== "" && postcodeInputRef.current.value != "") {
 
                 fetch("http://localhost:8080/buyer/add", {
                     method: "POST",
@@ -75,32 +75,32 @@ export default function NewForm2() {
             }
 
             else {
-                if (forenameInputRef.current.value == "") {
+                if (forenameInputRef.current.value === "") {
                     fnameErr.current.style.display = "block";
                 } else {
                     fnameErr.current.style.display = "none";
 
                 }
 
-                if (surnameInputRef.current.value == "") {
+                if (surnameInputRef.current.value === "") {
                     snameErr.current.style.display = "block";
                 } else {
                     snameErr.current.style.display = "none";
 
                 }
-                if (phoneInputRef.current.value == "") {
+                if (phoneInputRef.current.value === "") {
                     phoneErr.current.style.display = "block";
                 } else {
                     phoneErr.current.style.display = "none";
 
                 }
-                if (addressInputRef.current.value == "") {
+                if (addressInputRef.current.value === "") {
                     addressErr.current.style.display = "block";
                 } else {
                     addressErr.current.style.display = "none";
 
                 }
-                if (postcodeInputRef.current.value == "") {
+                if (postcodeInputRef.current.value === "") {
                     postcodeErr.current.style.display = "block";
                 } else {
                     postcodeErr.current.style.display = "none";
