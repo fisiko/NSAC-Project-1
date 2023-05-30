@@ -22,7 +22,7 @@ function SellerProp() {
 
     useEffect(() => {
 
-        fetch(`http://18.134.155.255:8080/property/read  `)
+        fetch(`http://18.169.34.1:8080/property/read  `)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read sellers");
@@ -43,7 +43,7 @@ function SellerProp() {
             setPropertyList(tempR)
 
 
-            fetch(`http://18.134.155.255:8080/property/delete/${recno}`, {
+            fetch(`http://18.169.34.1:8080/property/delete/${recno}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ function SellerProp() {
 
         const statusChange = { status: "FOR SALE" };
 
-        fetch(`http://18.134.155.255:8080/property/update/${recno}`, {
+        fetch(`http://18.169.34.1:8080/property/update/${recno}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ function SellerProp() {
 
         const statusChange = { "status": "WITHDRAWN" };
 
-        fetch(`http://18.134.155.255:8080/property/update/${recno}`, {
+        fetch(`http://18.169.34.1:8080/property/update/${recno}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ function SellerProp() {
     }
 
     function updatePList() {
-        fetch(`http://18.134.155.255:8080/property/read`)
+        fetch(`http://18.169.34.1:8080/property/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read sellers");
@@ -125,7 +125,7 @@ function SellerProp() {
 
     function canc() {
         setAmend(true)
-        fetch(`http://18.134.155.255:8080/property/read`)
+        fetch(`http://18.169.34.1:8080/property/read`)
         .then((response) => {
             if (!response.ok) {
                 alert("An error has occured, unable to read sellers");
@@ -167,7 +167,7 @@ function SellerProp() {
             console.log(tempR)
 
 
-            fetch(`http://18.134.155.255:8080/property/update/${recno.property_id}`, {
+            fetch(`http://18.169.34.1:8080/property/update/${recno.property_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -26,7 +26,7 @@ export default function Booking() {
     useEffect(() => {
 
 
-    fetch(`http://18.134.155.255:8080/buyer/read`)
+    fetch(`http://18.169.34.1:8080/buyer/read`)
         .then((response) => {
             if (!response.ok) {
                 alert("An error has occured, unable to read properties");
@@ -75,7 +75,7 @@ export default function Booking() {
 
             if(nameRef.current.value !== "" && timeRef.current.value !== "" && dateRef.current.value !== ""){
 
-                fetch("http://18.134.155.255:8080/booking/add", {
+                fetch("http://18.169.34.1:8080/booking/add", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(tempR)

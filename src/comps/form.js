@@ -21,7 +21,7 @@ export default function NewForm() {
     const [sellerList, setSellerList] = useState([])
 
     useEffect(() => {
-        fetch(`http://18.134.155.255:8080/seller/read`)
+        fetch(`http://18.169.34.1:8080/seller/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read sellers");
@@ -64,7 +64,7 @@ export default function NewForm() {
 
 
 
-                fetch("http://18.134.155.255:8080/seller/add", {
+                fetch("http://18.169.34.1:8080/seller/add", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(tempR)
