@@ -22,7 +22,7 @@ export default function NewForm2() {
     const [buyerList, setbuyerList] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:8080/buyer/read`)
+        fetch(`http://18.134.155.255:8080/buyer/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read buyers");
@@ -55,7 +55,7 @@ export default function NewForm2() {
         if (!buyerList.some(item => compareObjects(item, tempR))) {
             if (forenameInputRef.current.value !== "" && surnameInputRef.current.value !== "" && phoneInputRef.current.value !== "" && addressInputRef.current.value !== "" && postcodeInputRef.current.value != "") {
 
-                fetch("http://localhost:8080/buyer/add", {
+                fetch("http://18.134.155.255:8080/buyer/add", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(tempR)

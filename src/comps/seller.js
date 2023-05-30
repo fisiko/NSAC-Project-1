@@ -12,7 +12,7 @@ export default function Sell() {
 
 
     useEffect(() => {
-        fetch(`http://localhost:8080/seller/read`)
+        fetch(`http://18.134.155.255:8080/seller/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read sellers");
@@ -39,7 +39,7 @@ export default function Sell() {
         setSellerList(tempR)
 
 
-        fetch(`http://localhost:8080/seller/delete/${recno}`, {
+        fetch(`http://18.134.155.255:8080/seller/delete/${recno}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

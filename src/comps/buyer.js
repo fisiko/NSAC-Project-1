@@ -14,7 +14,7 @@ export default function BuyerData() {
 
 
     useEffect(() => {
-        fetch(`http://localhost:8080/buyer/read`)
+        fetch(`http://18.134.155.255:8080/buyer/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read buyers");
@@ -43,7 +43,7 @@ console.log(buyerList);
             setbuyerList(tempR)
 
 
-            fetch(`http://localhost:8080/buyer/delete/${recno}`, {
+            fetch(`http://18.134.155.255:8080/buyer/delete/${recno}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

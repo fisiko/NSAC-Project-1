@@ -18,7 +18,7 @@ export default function Property() {
 
     useEffect(() => {
 
-        fetch(`http://localhost:8080/property/read`)
+        fetch(`http://18.134.155.255:8080/property/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read sellers");
@@ -57,7 +57,7 @@ export default function Property() {
 
 
 
-        fetch(`http://localhost:8080/property/read`)
+        fetch(`http://18.134.155.255:8080/property/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read sellers");

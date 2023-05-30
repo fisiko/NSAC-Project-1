@@ -31,7 +31,7 @@ export default function PropForm() {
     const [propertyList, setpropertyList] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:8080/property/read`)
+        fetch(`http://18.134.155.255:8080/property/read`)
             .then((response) => {
                 if (!response.ok) {
                     alert("An error has occured, unable to read properties");
@@ -71,7 +71,7 @@ export default function PropForm() {
             if (typeInputRef.current.value != "" && priceInputRef.current.value != "" && bedInputRef.current.value != "" && bathInputRef.current.value != "" && gardenInputRef.current.value != "" && addressInputRef.current.value != "" && postcodeInputRef.current.value != "") {
 
 
-                fetch("http://localhost:8080/property/add", {
+                fetch("http://18.134.155.255:8080/property/add", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(tempR)
